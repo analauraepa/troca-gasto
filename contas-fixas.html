@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contas Fixas — Protótipo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<header>
+  <div class="brand"><span class="brand-dot"></span>Finanças</div>
+  
+<nav>
+  <a href="resumo.html" class="nav-link resumo">Resumo</a>
+  <a href="movimentacoes.html" class="nav-link movimentacoes">Movimentações</a>
+  <a href="cartoes.html" class="nav-link cartoes">Cartões</a>
+  <a href="contas-fixas.html" class="nav-link fixas on">Contas fixas</a>
+</nav>
+
+  <div class="header-actions">
+    <a class="icon-btn" href="alertas.html" title="Alertas" aria-label="Alertas">🔔</a>
+    <a class="avatar" href="perfil.html" title="Perfil" aria-label="Perfil">U</a>
+  </div>
+</header>
+<main>
+  <div class="page-top">
+    <div>
+      <h1>Contas Fixas</h1>
+      <p>Seu dinheiro organizado de forma simples.</p>
+    </div>
+  </div>
+  
+<section>
+  <div class="section-head" style="margin-top:0">
+    <div><h2>Contas fixas</h2><p>Gastos que se repetem todos os meses. O pagamento é feito por uma conta ou cartão escolhido pelo usuário.</p></div>
+    <a class="btn primary" href="contas-fixas.html">+ Nova conta fixa</a>
+  </div>
+
+  <div class="summary-grid" style="grid-template-columns:repeat(3,1fr)">
+    <div class="card summary-card"><div class="label">Total mensal</div><div class="value out">R$ 989,90</div></div>
+    <div class="card summary-card"><div class="label">Contas ativas</div><div class="value">3</div></div>
+    <div class="card summary-card"><div class="label">Pagas neste mês</div><div class="value in">0</div></div>
+  </div>
+
+  <div class="card" style="margin-top:15px">
+    <div class="list">
+      <div class="list-row">
+        <div>
+          <div class="row-title">Aluguel</div>
+          <div class="small">Todo dia 10 · Casa · Conta: Nubank <span class="badge ">ativa</span></div>
+        </div>
+        <div style="text-align:right">
+          <strong>R$ 800,00</strong>
+          <div class="actions" style="margin-top:6px">
+            <a class="mini" href="contas-fixas.html" aria-label="Editar"><i class="fa-solid fa-pencil" style="color: #3f7d5b;"></i></a>
+            <a class="mini" href="contas-fixas.html" aria-label="Excluir"><i class="fa-solid fa-trash" style="color: #c85b5b;"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="list-row">
+        <div>
+          <div class="row-title">Luz</div>
+          <div class="small">Todo dia 20 · Casa · Conta: Mercado Pago <span class="badge ">ativa</span></div>
+        </div>
+        <div style="text-align:right">
+          <strong>R$ 150,00</strong>
+          <div class="actions" style="margin-top:6px">
+            <a class="mini" href="contas-fixas.html" aria-label="Editar"><i class="fa-solid fa-pencil" style="color: #3f7d5b;"></i></a>
+            <a class="mini" href="contas-fixas.html" aria-label="Excluir"><i class="fa-solid fa-trash" style="color: #c85b5b;"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="list-row">
+        <div>
+          <div class="row-title">Streaming</div>
+          <div class="small">Todo dia 25 · Assinaturas · Cartão: Nubank <span class="badge ">ativa</span></div>
+        </div>
+        <div style="text-align:right">
+          <strong>R$ 39,90</strong>
+          <div class="actions" style="margin-top:6px">
+            <a class="mini" href="contas-fixas.html" aria-label="Editar"><i class="fa-solid fa-pencil" style="color: #3f7d5b;"></i></a>
+            <a class="mini" href="contas-fixas.html" aria-label="Excluir"><i class="fa-solid fa-trash" style="color: #c85b5b;"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="list-row">
+        <div>
+          <div class="row-title">Água</div>
+          <div class="small">Todo dia 28 · Casa · Conta: Nubank <span class="badge red">inativa</span></div>
+        </div>
+        <div style="text-align:right">
+          <strong>R$ 80,00</strong>
+          <div class="actions" style="margin-top:6px">
+            <a class="mini" href="contas-fixas.html" aria-label="Editar"><i class="fa-solid fa-pencil" style="color: #3f7d5b;"></i></a>
+            <a class="mini" href="contas-fixas.html" aria-label="Excluir"><i class="fa-solid fa-trash" style="color: #c85b5b;"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer>Protótipo visual com dados fictícios · sem banco de dados</footer>
+<script type="module" src="/src/main.js"></script>
+</body>
+</html>

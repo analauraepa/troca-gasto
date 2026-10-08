@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Movimentações — Protótipo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<header>
+  <div class="brand"><span class="brand-dot"></span>Finanças</div>
+  
+<nav>
+  <a href="resumo.html" class="nav-link resumo">Resumo</a>
+  <a href="movimentacoes.html" class="nav-link movimentacoes on">Movimentações</a>
+  <a href="cartoes.html" class="nav-link cartoes">Cartões</a>
+  <a href="contas-fixas.html" class="nav-link fixas">Contas fixas</a>
+</nav>
+
+  <div class="header-actions">
+    <a class="icon-btn" href="alertas.html" title="Alertas" aria-label="Alertas">🔔</a>
+    <a class="avatar" href="perfil.html" title="Perfil" aria-label="Perfil">U</a>
+  </div>
+</header>
+<main>
+  <div class="page-top">
+    <div>
+      <h1>Movimentações</h1>
+      <p>Seu dinheiro organizado de forma simples.</p>
+    </div>
+  </div>
+  
+<section>
+  <div class="section-head" style="margin-top:0">
+    <div><h2>Movimentações</h2><p>Bancos e todas as suas movimentações, com filtros em um só lugar.</p></div>
+    <div class="quick">
+      <a class="btn primary" href="movimentacoes.html">+ Banco</a>
+      <a class="btn primary" href="movimentacoes.html">+ Movimentação</a>
+    </div>
+  </div>
+
+  <div class="summary-grid" style="grid-template-columns:repeat(3,1fr)">
+    <div class="card summary-card"><div class="label">Saldo total</div><div class="value">R$ 7.455,56</div></div>
+    <div class="card summary-card"><div class="label">Contas pendentes</div><div class="value out">R$ 1.049,90</div></div>
+    <div class="card summary-card"><div class="label">Faturas dos cartões</div><div class="value out">R$ 2.140,00</div></div>
+  </div>
+
+  <div class="section-head"><div><h2>Seus bancos</h2><p>Saldo disponível em cada conta.</p></div></div>
+  <div class="grid3">
+    <div class="card">
+      <div class="bank-top"><span class="bank-name">Nubank</span><div class="actions">
+        <a class="mini" href="movimentacoes.html" aria-label="Editar"><i class="fa-solid fa-pencil" style="color: #3f7d5b;"></i></a>
+        <a class="mini" href="movimentacoes.html" aria-label="Excluir"><i class="fa-solid fa-trash" style="color: #c85b5b;"></i></a>
+      </div></div>
+      <div class="small" style="margin-top:12px">Saldo</div>
+      <div class="bank-balance">R$ 3.141,28</div>
+      <div class="bank-flow"><span class="in">↑ entradas R$ 1.500,00</span><span class="out">↓ saídas R$ 1.120,00</span></div>
+    </div>
+    <div class="card">
+      <div class="bank-top"><span class="bank-name">Dinheiro em espécie</span><div class="actions">
+        <a class="mini" href="movimentacoes.html" aria-label="Editar"><i class="fa-solid fa-pencil" style="color: #3f7d5b;"></i></a>
+        <a class="mini" href="movimentacoes.html" aria-label="Excluir"><i class="fa-solid fa-trash" style="color: #c85b5b;"></i></a>
+      </div></div>
+      <div class="small" style="margin-top:12px">Saldo</div>
+      <div class="bank-balance">R$ 25,00</div>
+      <div class="bank-flow"><span class="in">↑ entradas R$ 0,00</span><span class="out">↓ saídas R$ 0,00</span></div>
+    </div>
+    <div class="card">
+      <div class="bank-top"><span class="bank-name">Mercado Pago</span><div class="actions">
+        <a class="mini" href="movimentacoes.html" aria-label="Editar"><i class="fa-solid fa-pencil" style="color: #3f7d5b;"></i></a>
+        <a class="mini" href="movimentacoes.html" aria-label="Excluir"><i class="fa-solid fa-trash" style="color: #c85b5b;"></i></a>
+      </div></div>
+      <div class="small" style="margin-top:12px">Saldo</div>
+      <div class="bank-balance">R$ 4.289,28</div>
+      <div class="bank-flow"><span class="in">↑ entradas R$ 80,00</span><span class="out">↓ saídas R$ 0,00</span></div>
+    </div>
+  </div>
+
+  <div class="section-head"><div><h2>Movimentações</h2><p>Lista estática das receitas e despesas registradas.</p></div></div>
+  <div class="card">
+    <div class="filters">
+      <input placeholder="Buscar movimentação..." disabled>
+      <select disabled><option>Todos</option></select>
+      <select disabled><option>Categorias</option></select>
+      <select disabled><option>Contas</option></select>
+      <select disabled><option>Cartões</option></select>
+    </div>
+    <div class="table-wrap"><table><thead><tr><th>Movimentação</th><th>Categoria</th><th>Data</th><th>Conta / cartão</th><th>Valor</th><th></th></tr></thead>
+    <tbody>
+<tr>
+  <td><strong>Salário</strong></td>
+  <td>Salário</td><td>05/10/2026</td><td>Nubank</td>
+  <td class="in"><strong>+R$ 1.420,00</strong></td><td></td>
+</tr>
+<tr>
+  <td><strong>Pix recebido</strong></td>
+  <td>Outros</td><td>02/10/2026</td><td>Mercado Pago</td>
+  <td class="in"><strong>+R$ 80,00</strong></td><td></td>
+</tr>
+<tr>
+  <td><strong>Gasolina</strong></td>
+  <td>Transporte</td><td>04/10/2026</td><td>Nubank</td>
+  <td class="out"><strong>−R$ 300,00</strong></td><td></td>
+</tr>
+<tr>
+  <td><strong>Aluguel</strong></td>
+  <td>Casa</td><td>06/10/2026</td><td>Nubank</td>
+  <td class="out"><strong>−R$ 800,00</strong></td><td></td>
+</tr>
+<tr>
+  <td><strong>Spotify</strong></td>
+  <td>Assinaturas</td><td>06/10/2026</td><td>Nubank</td>
+  <td class="out"><strong>−R$ 20,00</strong></td><td></td>
+</tr>
+<tr>
+  <td><strong>Geladeira nova — 2/10</strong></td>
+  <td>Casa</td><td>03/10/2026</td><td>cartão Nubank</td>
+  <td class="out"><strong>−R$ 310,00</strong></td><td></td>
+</tr></tbody></table></div>
+  </div>
+</section>
+
+</main>
+<footer>Protótipo visual com dados fictícios · sem banco de dados</footer>
+<script type="module" src="/src/main.js"></script>
+</body>
+</html>
