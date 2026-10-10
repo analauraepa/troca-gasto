@@ -365,7 +365,12 @@ main {
 }
 
 .btn.danger {
-  color: var(--red);
+  background-color: var(--red);
+  color: #fff;
+}
+
+.btn.danger:hover {
+  background-color: #a94b4b;
 }
 
 
@@ -542,6 +547,14 @@ td:last-child, th:last-child {
 }
 
 
+/* DROPDOWNS */
+
+.dropdown-menu .dropdown-item {
+    font-size: 14px;
+    cursor: pointer;
+}
+
+
 /* FOOTER */
 footer {
   text-align: center;
@@ -552,60 +565,151 @@ footer {
 
 
 /* MODAIS */
-.modal-backdrop {
-  position: fixed;
-  inset: 0;
-  background: rgba(24,49,39,.42);
-  backdrop-filter: blur(3px);
-  display: grid;
-  place-items: center;
-  padding: 20px;
-  z-index: 100;
+.modal .modal-dialog {
+    max-width: 440px;
+    margin: 1.5rem auto;
+    padding: 0 12px;
 }
 
-.modal {
-  width: min(430px, 100%);
-  background: #fff;
-  border-radius: 15px;
-  padding: 20px;
-  box-shadow: var(--shadow-lg);
-  border: 1px solid var(--line);
+.modal .modal-content {
+    background-color: var(--card);
+    color: var(--text);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
 }
 
-.modal h3 {
-  margin: 0 0 15px;
-  font-size: 17px;
+.modal .modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 22px 24px 18px;
+    border-bottom: 1px solid var(--line);
 }
 
-.field {
-  display: grid;
-  gap: 5px;
-  margin-bottom: 10px;
+.modal .modal-title {
+    margin: 0;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 18px;
+    font-weight: 700;
 }
 
-.field label {
-  font-size: 10px;
-  color: var(--muted);
-  font-weight: 600;
+.modal .btn-close {
+    width: fit-content;
+    height: fit-content;
+    padding: 0;
+    margin: 0;
+    border: none;
+    background-color: transparent;
+    color: var(--muted);
+    font-size: 20px;
 }
 
-.modal-actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 8px;
-  margin-top: 15px;
+.modal .modal-body {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding: 22px 24px;
 }
 
-.check {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  font-size: 10px;
-  color: var(--muted);
+.modal .modal-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
 }
 
-.check input {
-  accent-color: var(--green);
+.modal .form-label {
+    margin: 0;
+    color: var(--text);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.modal .invalid-feedback {
+    color: var(--red);
+    font-size: 12px;
+}
+
+.modal .invalid-feedback.hide {
+    display: none;
+}
+
+.modal .form-control {
+    width: 100%;
+    min-height: 42px;
+    padding: 10px 12px;
+    border: 1px solid var(--line);
+    border-radius: 9px;
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: inherit;
+    font-size: 12px;
+    box-shadow: none;
+    transition: border-color .2s, box-shadow .2s;
+}
+
+.modal .form-control.red {
+    border-color: var(--red);
+}
+
+.modal .form-control::placeholder {
+    color: #93a198;
+}
+
+.modal .form-control:focus {
+    border-color: var(--green);
+    background-color: #fff;
+    box-shadow: 0 0 0 3px rgba(63, 125, 91, .12);
+    outline: none;
+}
+
+.modal .modal-footer {
+    padding: 16px 24px 22px;
+    border-top: 1px solid var(--line);
+    background-color: var(--green-pale);
+}
+
+.modal .modal-footer .btn-primary {
+    width: 100%;
+    min-height: 42px;
+    padding: 10px 14px;
+    border: 1px solid var(--green);
+    border-radius: 9px;
+    background-color: var(--green);
+    color: #fff;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    box-shadow: none;
+    transition: background-color .2s, border-color .2s;
+}
+
+.modal .modal-footer .btn-primary:hover {
+    background-color: var(--green-dark);
+    border-color: var(--green-dark);
+}
+
+.modal .modal-footer .btn-primary:focus-visible {
+    outline: 3px solid rgba(63, 125, 91, .25);
+    outline-offset: 2px;
+}
+
+.modal .modal-content {
+    animation: modal-entrada .2s ease-out;
+}
+
+@keyframes modal-entrada {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 
@@ -677,6 +781,20 @@ footer {
     padding: 8px 9px;
     font-size: 11px;
   }
+}
+
+@media (max-width: 480px) {
+    .modal .modal-header {
+        padding: 18px 18px 15px;
+    }
+
+    .modal .modal-body {
+        padding: 20px 18px;
+    }
+
+    .modal .modal-footer {
+        padding: 14px 18px 18px;
+    }
 }
 
 

@@ -1,129 +1,275 @@
 <!doctype html>
 <html lang="pt-BR">
+
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Movimentações — Protótipo</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Movimentações — Protótipo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
-<header>
-  <div class="brand"><span class="brand-dot"></span>Finanças</div>
-  
-<nav>
-  <a href="index.html" class="nav-link resumo">Resumo</a>
-  <a href="movimentacoes.html" class="nav-link movimentacoes on">Movimentações</a>
-  <a href="cartoes.html" class="nav-link cartoes">Cartões</a>
-  <a href="contas-fixas.html" class="nav-link fixas">Contas fixas</a>
-</nav>
+  <header>
+    <div class="brand"><span class="brand-dot"></span>Finanças</div>
 
-  <div class="header-actions">
-    <a class="icon-btn" href="alertas.html" title="Alertas" aria-label="Alertas">🔔</a>
-    <a class="avatar" href="perfil.html" title="Perfil" aria-label="Perfil">U</a>
-  </div>
-</header>
-<main>
-  <div class="page-top">
-    <div>
-      <h1>Movimentações</h1>
-      <p>Seu dinheiro organizado de forma simples.</p>
+    <nav>
+      <a href="index.html" class="nav-link resumo">Resumo</a>
+      <a href="movimentacoes.html" class="nav-link movimentacoes on">Movimentações</a>
+      <a href="cartoes.html" class="nav-link cartoes">Cartões</a>
+      <a href="contas-fixas.html" class="nav-link fixas">Contas fixas</a>
+    </nav>
+
+    <div class="header-actions">
+      <a class="icon-btn" href="alertas.html" title="Alertas" aria-label="Alertas">🔔</a>
+      <a class="avatar" href="perfil.html" title="Perfil" aria-label="Perfil">U</a>
     </div>
-  </div>
-  
-<section>
-  <div class="section-head" style="margin-top:0">
-    <div><h2>Movimentações</h2><p>Bancos e todas as suas movimentações, com filtros em um só lugar.</p></div>
-    <div class="quick">
-      <a class="btn primary" href="movimentacoes.html">+ Banco</a>
-      <a class="btn primary" href="movimentacoes.html">+ Movimentação</a>
+  </header>
+  <main>
+    <div class="page-top">
+      <div>
+        <h1>Movimentações</h1>
+        <p>Seu dinheiro organizado de forma simples.</p>
+      </div>
+    </div>
+
+    <section>
+      <!-- RESUMO -->
+      <div class="section-head" style="margin-top:0">
+        <div>
+          <h2>Resumo</h2>
+        </div>
+      </div>
+
+      <div class="grid3">
+        <div class="card summary-card">
+          <div class="label">Saldo total</div>
+          <div class="value">R$ 7.455,56</div>
+        </div>
+        <div class="card summary-card">
+          <div class="label">Contas pendentes</div>
+          <div class="value out">R$ 1.049,90</div>
+        </div>
+        <div class="card summary-card">
+          <div class="label">Faturas dos cartões</div>
+          <div class="value out">R$ 2.140,00</div>
+        </div>
+      </div>
+
+      <!-- BANCOS -->
+      <div class="section-head">
+        <div>
+          <h2>Meus bancos</h2>
+          <p>Onde seu dinheiro está agora.</p>
+        </div>
+        <div>
+          <button type="button" class="btn primary" data-bs-toggle="modal" data-bs-target="#modal-adicionar-banco">+
+            Banco</button>
+        </div>
+      </div>
+      <div class="grid3" id="banks"><!--cards são gerados dinamicamente aqui--></div>
+
+      <!-- MOVIMENTACOES -->
+      <div class="section-head">
+        <div>
+          <h2>Movimentações</h2>
+          <p>Para onde seu dinheiro está indo.</p>
+        </div>
+        <div class="dropdown">
+          <button type="button" class="btn primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">+ Movimentação</button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modal-adicionar-entrada">Adicionar entrada</a></li>
+            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modal-adicionar-saida">Adicionar saída</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Movimentação</th>
+                <th>Data</th>
+                <th>Banco</th>
+                <th>Valor</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="lista-movimentacoes"><!--linhas são geradas dinamicamente aqui--></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
+  <footer>Protótipo visual com dados fictícios · sem banco de dados</footer>
+
+  <!-- MODAIS -->
+
+  <div class="modal fade" id="modal-adicionar-banco" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Adicionar banco</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar">&times;</button>
+        </div>
+        <form id="form-adicionar-banco" novalidate>
+          <div class="modal-body">
+            <div class="modal-form-group">
+              <label for="add-nome-banco" class="form-label">Nome do banco</label>
+              <input type="text" class="form-control" id="add-nome-banco" placeholder="Ex.: Nubank" required>
+              <div class="invalid-feedback hide">Insira o nome do banco.</div>
+            </div>
+            <div class="modal-form-group">
+              <label for="add-saldo-banco" class="form-label">Saldo inicial</label>
+              <input type="number" class="form-control" id="add-saldo-banco" placeholder="0,00" step="0.01">
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Adicionar banco</button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 
-  <div class="summary-grid" style="grid-template-columns:repeat(3,1fr)">
-    <div class="card summary-card"><div class="label">Saldo total</div><div class="value">R$ 7.455,56</div></div>
-    <div class="card summary-card"><div class="label">Contas pendentes</div><div class="value out">R$ 1.049,90</div></div>
-    <div class="card summary-card"><div class="label">Faturas dos cartões</div><div class="value out">R$ 2.140,00</div></div>
-  </div>
+  <div class="modal fade" id="modal-editar-banco" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Editar banco</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar">&times;</button>
+        </div>
+        <form id="form-editar-banco" novalidate>
+          <div class="modal-body">
+            <div class="modal-form-group">
+              <label for="edit-nome-banco" class="form-label">Nome do banco</label>
+              <input type="text" class="form-control" id="edit-nome-banco" placeholder="Ex.: Nubank" required>
+              <div class="invalid-feedback hide">Insira o nome do banco.</div>
+            </div>
+          </div>
 
-  <div class="section-head"><div><h2>Seus bancos</h2><p>Saldo disponível em cada conta.</p></div></div>
-  <div class="grid3">
-    <div class="card">
-      <div class="bank-top"><span class="bank-name">Nubank</span><div class="actions">
-        <a class="mini" href="movimentacoes.html" aria-label="Editar"><i class="fa-solid fa-pencil" style="color: #3f7d5b;"></i></a>
-        <a class="mini" href="movimentacoes.html" aria-label="Excluir"><i class="fa-solid fa-trash" style="color: #c85b5b;"></i></a>
-      </div></div>
-      <div class="small" style="margin-top:12px">Saldo</div>
-      <div class="bank-balance">R$ 3.141,28</div>
-      <div class="bank-flow"><span class="in">↑ entradas R$ 1.500,00</span><span class="out">↓ saídas R$ 1.120,00</span></div>
-    </div>
-    <div class="card">
-      <div class="bank-top"><span class="bank-name">Dinheiro em espécie</span><div class="actions">
-        <a class="mini" href="movimentacoes.html" aria-label="Editar"><i class="fa-solid fa-pencil" style="color: #3f7d5b;"></i></a>
-        <a class="mini" href="movimentacoes.html" aria-label="Excluir"><i class="fa-solid fa-trash" style="color: #c85b5b;"></i></a>
-      </div></div>
-      <div class="small" style="margin-top:12px">Saldo</div>
-      <div class="bank-balance">R$ 25,00</div>
-      <div class="bank-flow"><span class="in">↑ entradas R$ 0,00</span><span class="out">↓ saídas R$ 0,00</span></div>
-    </div>
-    <div class="card">
-      <div class="bank-top"><span class="bank-name">Mercado Pago</span><div class="actions">
-        <a class="mini" href="movimentacoes.html" aria-label="Editar"><i class="fa-solid fa-pencil" style="color: #3f7d5b;"></i></a>
-        <a class="mini" href="movimentacoes.html" aria-label="Excluir"><i class="fa-solid fa-trash" style="color: #c85b5b;"></i></a>
-      </div></div>
-      <div class="small" style="margin-top:12px">Saldo</div>
-      <div class="bank-balance">R$ 4.289,28</div>
-      <div class="bank-flow"><span class="in">↑ entradas R$ 80,00</span><span class="out">↓ saídas R$ 0,00</span></div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Editar banco</button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 
-  <div class="section-head"><div><h2>Movimentações</h2><p>Lista estática das receitas e despesas registradas.</p></div></div>
-  <div class="card">
-    <div class="filters">
-      <input placeholder="Buscar movimentação..." disabled>
-      <select disabled><option>Todos</option></select>
-      <select disabled><option>Categorias</option></select>
-      <select disabled><option>Contas</option></select>
-      <select disabled><option>Cartões</option></select>
+  <div class="modal fade" id="modal-excluir-banco" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Excluir banco</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p>Tem certeza de que deseja excluir este banco?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn danger" id="btn-excluir-banco">Excluir</button>
+        </div>
+      </div>
     </div>
-    <div class="table-wrap"><table><thead><tr><th>Movimentação</th><th>Categoria</th><th>Data</th><th>Conta / cartão</th><th>Valor</th><th></th></tr></thead>
-    <tbody>
-<tr>
-  <td><strong>Salário</strong></td>
-  <td>Salário</td><td>05/10/2026</td><td>Nubank</td>
-  <td class="in"><strong>+R$ 1.420,00</strong></td><td></td>
-</tr>
-<tr>
-  <td><strong>Pix recebido</strong></td>
-  <td>Outros</td><td>02/10/2026</td><td>Mercado Pago</td>
-  <td class="in"><strong>+R$ 80,00</strong></td><td></td>
-</tr>
-<tr>
-  <td><strong>Gasolina</strong></td>
-  <td>Transporte</td><td>04/10/2026</td><td>Nubank</td>
-  <td class="out"><strong>−R$ 300,00</strong></td><td></td>
-</tr>
-<tr>
-  <td><strong>Aluguel</strong></td>
-  <td>Casa</td><td>06/10/2026</td><td>Nubank</td>
-  <td class="out"><strong>−R$ 800,00</strong></td><td></td>
-</tr>
-<tr>
-  <td><strong>Spotify</strong></td>
-  <td>Assinaturas</td><td>06/10/2026</td><td>Nubank</td>
-  <td class="out"><strong>−R$ 20,00</strong></td><td></td>
-</tr>
-<tr>
-  <td><strong>Geladeira nova — 2/10</strong></td>
-  <td>Casa</td><td>03/10/2026</td><td>cartão Nubank</td>
-  <td class="out"><strong>−R$ 310,00</strong></td><td></td>
-</tr></tbody></table></div>
   </div>
-</section>
 
-</main>
-<footer>Protótipo visual com dados fictícios · sem banco de dados</footer>
-<script type="module" src="/src/main.js"></script>
+  <div class="modal fade" id="modal-adicionar-entrada" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Adicionar Entrada</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar">&times;</button>
+        </div>
+        <form id="form-adicionar-entrada" novalidate>
+          <div class="modal-body">
+            <div class="modal-form-group">
+              <label for="add-descricao-entrada" class="form-label">Descrição</label>
+              <input type="text" class="form-control" id="add-descricao-entrada" placeholder="Ex.: Salário" required>
+              <div class="invalid-feedback hide">Insira uma descrição.</div>
+            </div>
+            <div class="modal-form-group">
+              <label for="add-valor-entrada" class="form-label">Valor</label>
+              <input type="number" class="form-control" id="add-valor-entrada" placeholder="0,00" step="0.01" required>
+              <div class="invalid-feedback hide">Insira um valor.</div>
+            </div>
+            <div class="modal-form-group">
+              <label for="add-data-entrada" class="form-label">Data</label>
+              <input type="text" class="form-control" id="add-data-entrada" placeholder="AAAA-MM-DD" required>
+              <div class="invalid-feedback hide">Insira uma data.</div>
+            </div>
+            <div class="modal-form-group">
+              <label for="add-banco-entrada" class="form-label">Banco</label>
+              <select id="add-banco-entrada"></select>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Adicionar movimentação</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modal-adicionar-saida" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Adicionar Saída</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar">&times;</button>
+        </div>
+        <form id="form-adicionar-saida" novalidate>
+          <div class="modal-body">
+            <div class="modal-form-group">
+              <label for="add-descricao-saida" class="form-label">Descrição</label>
+              <input type="text" class="form-control" id="add-descricao-saida" placeholder="Ex.: Gasolina" required>
+              <div class="invalid-feedback hide">Insira uma descrição.</div>
+            </div>
+            <div class="modal-form-group">
+              <label for="add-valor-saida" class="form-label">Valor</label>
+              <input type="number" class="form-control" id="add-valor-saida" placeholder="0,00" step="0.01" required>
+              <div class="invalid-feedback hide">Insira um valor.</div>
+            </div>
+            <div class="modal-form-group">
+              <label for="add-data-saida" class="form-label">Data</label>
+              <input type="text" class="form-control" id="add-data-saida" placeholder="AAAA-MM-DD" required>
+              <div class="invalid-feedback hide">Insira uma data.</div>
+            </div>
+            <div class="modal-form-group">
+              <label for="add-banco-saida" class="form-label">Banco</label>
+              <select id="add-banco-saida"></select>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Adicionar movimentação</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modal-excluir-movimentacao" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Excluir movimentação</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p>Tem certeza de que deseja excluir esta movimentação?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn danger" id="btn-excluir-movimentacao">Excluir</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
 </body>
+
 </html>
