@@ -60,6 +60,11 @@ new Datepicker(
     { ...opcoesData }
 );
 
+new Datepicker(
+    document.querySelector('#edit-data-movimentacao'),
+    { ...opcoesData }
+);
+
 // RENDERIZAÇÃO INICIAL
 carregarBancos(divBancos, bancoService.bancos);
 carregarBancosOptions(selectBancosEntrada,bancoService.bancos);
