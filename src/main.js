@@ -12,6 +12,9 @@ import { carregarMovimentacoes } from './components/movimentacao.components.js';
 import * as bancoService from './services/banco.services.js';
 import * as movimentacoesService from './services/movimentacao.services.js';
 
+import { exibirSaldoTotal } from './components/resumo.components.js';
+import { calcularTotalSaldo } from './services/resumo.service.js';
+
 const divBancos = document.querySelector('#banks');
 const selectBancosEntrada = document.querySelector('#add-banco-entrada');
 const selectBancosSaida = document.querySelector('#add-banco-saida');
@@ -51,11 +54,15 @@ divBancos.addEventListener('click', (event) => {
     if (event.target.closest('.fa-pencil')) {
         const index = card.getAttribute('data-index');
         document.querySelector('#modal-editar-movimentacao').setAttribute('data-index', index);
+        atualizarSaldoTotal();
+
     }
 
     if (event.target.closest('.fa-trash')) {
         const index = card.getAttribute('data-index');
         document.querySelector('#modal-excluir-movimentacao').setAttribute('data-index', index);
+        atualizarSaldoTotal();
+
     }
 });
 
@@ -64,11 +71,15 @@ listaMovimentacoes.addEventListener('click', (event) => {
     if (event.target.closest('.fa-pencil')) {
         const index = card.getAttribute('data-index');
         document.querySelector('#modal-editar-banco').setAttribute('data-index', index);
+        atualizarSaldoTotal();
+
     }
 
     if (event.target.closest('.fa-trash')) {
         const index = card.getAttribute('data-index');
         document.querySelector('#modal-excluir-banco').setAttribute('data-index', index);
+        atualizarSaldoTotal();
+
     }
 });
 
@@ -90,6 +101,8 @@ formAddBanco.addEventListener('submit', (event) => {
             carregarBancosOptions(selectBancosSaida, bancoService.bancos);
             formAddBanco.reset();
             modalAdicionarBanco.hide();
+            atualizarSaldoTotal();
+
         }
 
     } else {
@@ -140,6 +153,8 @@ formAddEntrada.addEventListener('submit', (event) => {
         carregarBancos(divBancos, bancoService.bancos);
         formAddEntrada.reset();
         modalAdicionarEntrada.hide();
+        atualizarSaldoTotal();
+
     }
 });
 
@@ -157,6 +172,8 @@ formAddSaida.addEventListener('submit', (event) => {
         carregarBancos(divBancos, bancoService.bancos);
         formAddSaida.reset();
         modalAdicionarSaida.hide();
+        atualizarSaldoTotal();
+
     }
 });
 
@@ -189,6 +206,8 @@ btnExcluirBanco.addEventListener('click', () => {
     carregarBancosOptions(selectBancosEntrada, bancoService.bancos);
     carregarBancosOptions(selectBancosSaida, bancoService.bancos);
     modalExcluirBanco.hide();
+    atualizarSaldoTotal();
+
 });
 
 btnExcluirMovimentacao.addEventListener('click', () => {
@@ -197,6 +216,18 @@ btnExcluirMovimentacao.addEventListener('click', () => {
     carregarBancos(divBancos, bancoService.bancos);
     carregarMovimentacoes(listaMovimentacoes, movimentacoesService.movimentacoes);
     modalexcluirMovimentacao.hide();
+    atualizarSaldoTotal();
 });
 
 /* FIM CÓDIGO GABRIEL */
+
+
+// cod laura ;) //
+
+const containerSaldoTotal = document.querySelector('.saldo-total');
+function atualizarSaldoTotal() {
+    if (!containerSaldoTotal) return;
+    exibirSaldoTotal(containerSaldoTotal, calcularTotalSaldo());
+}
+
+atualizarSaldoTotal();
