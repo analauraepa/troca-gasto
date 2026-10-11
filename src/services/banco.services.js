@@ -1,4 +1,5 @@
 import { Banco } from "../models/Banco.js"
+import * as movimentacaoService from "./movimentacao.services.js"
 
 //Cria um array de objetos apartir dos dados salvos no localStorage, caso não haja dados, cria um array vazio
 const dados = JSON.parse(localStorage.getItem("bancos")) || [];
@@ -17,14 +18,18 @@ export function adicionarBanco(nome,saldo = 0) {
     salvarBancos();
 }
 
-//Edita o nome de uma conta existente no array contas e salva no localStorage
+//Edita o nome de um banco existente no array bancos e salva no localStorage
 export function editarBanco(nome,index) {
+    const bancoAntigo = bancos[index].nome
+    movimentacaoService.atualizarMovimentacoesEdicao(bancoAntigo,nome);
     bancos[index].nome = nome;
     salvarBancos();
 }
 
-//Remove uma conta existente no array contas e salva no localStorage
+//Remove um banco existente no array bancos (bem como suas movimentções) e salva no localStorage
 export function removerBanco(index) {
+    const banco = bancos[index].nome;
+    movimentacaoService.atualizarMovimentacoesExclusao(banco);
     bancos.splice(index,1)
     salvarBancos();
 }

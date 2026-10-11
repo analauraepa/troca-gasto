@@ -658,6 +658,11 @@ footer {
     color: #93a198;
 }
 
+#modal-editar-movimentacao .form-control::placeholder {
+    color: var(--text);
+    opacity: 1;
+}
+
 .modal .form-control:focus {
     border-color: var(--green);
     background-color: #fff;
@@ -710,6 +715,59 @@ footer {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+
+/* DATEPICKER */
+.datepicker-picker {
+    border: 1px solid #dce7e0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.10);
+    width: 260px;
+    height: 240px;
+    min-width: 100px;
+    box-sizing: border-box;
+}
+
+.datepicker-header .datepicker-controls {
+    padding: 4px;
+    gap: 4px;
+}
+
+.datepicker-header .datepicker-controls .button {
+    height: 28px;
+    min-height: 28px;
+    padding: 2px 8px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #243b30;
+    background-color: #e5f1e9;
+    border: 1px solid #dce7e0;
+    border-radius: 4px;
+    box-shadow: none;
+}
+
+.datepicker-header .datepicker-controls .button:hover {
+    background-color: #dcebe1;
+    border-color: #cbded1;
+}
+
+.datepicker-cell {
+    height: 25px;
+    font-size: 12px;
+}
+
+.datepicker-cell.selected,
+.datepicker-cell.selected:hover {
+    background-color: var(--green);
+    color: #fff;
+}
+
+/* Dia selecionado ao receber foco */
+.datepicker-cell.selected.focused {
+    background-color: var(--green-dark);
+    color: #fff;
 }
 
 

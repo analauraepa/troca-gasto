@@ -45,7 +45,7 @@
       <div class="grid3">
         <div class="card summary-card">
           <div class="label">Saldo total</div>
-          <div class="value">R$ 7.455,56</div>
+          <div class="value" id="card-saldo-total"></div>
         </div>
         <div class="card summary-card">
           <div class="label">Contas pendentes</div>
@@ -106,7 +106,6 @@
   <footer>Protótipo visual com dados fictícios · sem banco de dados</footer>
 
   <!-- MODAIS -->
-
   <div class="modal fade" id="modal-adicionar-banco" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
@@ -198,12 +197,13 @@
             </div>
             <div class="modal-form-group">
               <label for="add-data-entrada" class="form-label">Data</label>
-              <input type="text" class="form-control" id="add-data-entrada" placeholder="AAAA-MM-DD" required>
-              <div class="invalid-feedback hide">Insira uma data.</div>
+              <input type="text" class="form-control" id="add-data-entrada" placeholder="DD/MM/AAAA" required>
+              <div class="invalid-feedback hide" id="feedback-data-entrada">Insira uma data.</div>
             </div>
             <div class="modal-form-group">
               <label for="add-banco-entrada" class="form-label">Banco</label>
-              <select id="add-banco-entrada"></select>
+              <select id="add-banco-entrada" required></select>
+              <div class="invalid-feedback hide">Adicione um banco.</div>
             </div>
           </div>
           <div class="modal-footer">
@@ -235,16 +235,47 @@
             </div>
             <div class="modal-form-group">
               <label for="add-data-saida" class="form-label">Data</label>
-              <input type="text" class="form-control" id="add-data-saida" placeholder="AAAA-MM-DD" required>
-              <div class="invalid-feedback hide">Insira uma data.</div>
+              <input type="text" class="form-control" id="add-data-saida" placeholder="DD/MM/YYYY" required>
+              <div class="invalid-feedback hide" id="feedback-data-saida">Insira uma data.</div>
             </div>
             <div class="modal-form-group">
               <label for="add-banco-saida" class="form-label">Banco</label>
               <select id="add-banco-saida"></select>
+              <div class="invalid-feedback hide">Adicione um banco.</div>
             </div>
           </div>
           <div class="modal-footer">
             <button type="submit" class="btn btn-primary">Adicionar movimentação</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modal-editar-movimentacao" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Editar movimentação</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar">&times;</button>
+        </div>
+        <form id="form-editar-movimentacao" novalidate>
+          <div class="modal-body">
+            <div class="modal-form-group">
+              <label for="edit-descricao-movimentacao" class="form-label">Descrição</label>
+              <input type="text" class="form-control" id="edit-descricao-movimentacao" placeholder="Ex.: Gasolina">
+            </div>
+            <div class="modal-form-group">
+              <label for="edit-valor-movimentacao" class="form-label">Valor</label>
+              <input type="number" class="form-control" id="edit-valor-movimentacao" placeholder="0,00" step="0.01">
+            </div>
+            <div class="modal-form-group">
+              <label for="edit-data-movimentacao" class="form-label">Data</label>
+              <input type="text" class="form-control" id="edit-data-movimentacao" placeholder="DD/MM/YYYY">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Editar movimentação</button>
           </div>
         </form>
       </div>

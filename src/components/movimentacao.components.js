@@ -1,3 +1,4 @@
+//Itera sobre o array de movimentações para criar as linhas da tabela de movimentações
 export function carregarMovimentacoes(listaMovimentacoes, movimentacoes){
     listaMovimentacoes.innerHTML = ''
     movimentacoes.forEach((movimentacao,index) => {

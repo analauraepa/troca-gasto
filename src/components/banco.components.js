@@ -15,11 +15,21 @@ export function carregarBancos(divBancos, bancos) {
     });
 }
 
+// Itera sobre o array de bancos e atualiza as opções de bancos nos formulários de adicionar e editar movimentações
 export function carregarBancosOptions(selectBancos, bancos){
     selectBancos.innerHTML = '';
     bancos.forEach((banco) => {
-        selectBancos.innerHTML = `
+        selectBancos.innerHTML += `
         <option value="${banco.nome}">${banco.nome}</option>
         `
     });
+}
+
+// Itera sobre o array de bancos e atualiza o saldo total
+export function carregarSaldoTotal(cardSaldoTotal,bancos) {
+    const total = bancos.reduce((acc,banco) => {
+        return acc + banco.saldo;
+    }, 0);
+
+    cardSaldoTotal.innerHTML = `R$ ${total.toFixed(2)}`;
 }
