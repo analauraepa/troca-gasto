@@ -10,7 +10,7 @@
 </head>
 <body>
 <header>
-  <div class="brand"><span class="brand-dot"></span>Finanças</div>
+  <div class="brand"><span class="brand-dot"></span>Troca Gastos</div>
   
 <nav>
   <a href="index.html" class="nav-link resumo on">Resumo</a>
@@ -35,15 +35,15 @@
 <section>
   <div class="hero">
     <div><h2>Olá, Usuário! 👋</h2><p>Uma visão rápida das suas finanças, contas e cartões.</p></div>
-    <div class="balance"><small>Saldo disponível</small><strong>R$ 7.455,56</strong></div>
+    <div class="balance"><small>Saldo disponível</small><div class="saldo-total"></div></div>
   </div>
 
   <div class="section-head"><div><h2>Visão do mês</h2><p>Entradas e saídas de outubro</p></div></div>
   <div class="summary-grid">
-    <div class="card summary-card"><div class="label">Receitas</div><div class="value in">R$ 1.500,00</div></div>
-    <div class="card summary-card"><div class="label">Despesas</div><div class="value out">R$ 1.430,00</div></div>
-    <div class="card summary-card"><div class="label">Resultado</div><div class="value in">R$ 70,00</div></div>
-    <div class="card summary-card"><div class="label">Faturas dos cartões</div><div class="value out">R$ 2.140,00</div></div>
+    <div class="card summary-card"><div class="label">Receitas</div><div class="value in receitas"></div></div>
+    <div class="card summary-card"><div class="label">Despesas</div><div class="value out saidas">R$ 1.430,00</div></div>
+    <div class="card summary-card"><div class="label">Resultado</div><div class="value in total">R$ 70,00</div></div>
+    <div class="card summary-card"><div class="label">Faturas dos cartões</div><div class="value out fatura">R$ 2.140,00</div></div>
   </div>
 
   <div class="section-head"><div><h2>Ações rápidas</h2><p>Escolha uma área para cadastrar ou consultar informações.</p></div></div>
@@ -100,6 +100,6 @@
 
 </main>
 <footer>Protótipo visual com dados fictícios · sem banco de dados</footer>
-<script type="module" src="/src/main.js"></script>
+<script type="module" src="/src/resumo.js"></script>
 </body>
 </html>

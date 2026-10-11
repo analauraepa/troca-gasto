@@ -17,8 +17,15 @@ import { iniciarMovimentacaoController } from './controllers/movimentacao.contro
 import * as bancoService from './services/banco.services.js';
 import * as movimentacaoServices from './services/movimentacao.services.js'
 
+
 import { carregarBancos, carregarBancosOptions, carregarSaldoTotal } from './components/banco.components.js';
 import { carregarMovimentacoes } from './components/movimentacao.components.js';
+
+// 
+import { exibirSaldoTotal } from './components/resumo.components.js';
+import { calcularTotalSaldo } from './services/resumo.service.js';
+// 
+
 
 library.add(faTrash, faPencil);
 dom.watch();
@@ -72,6 +79,7 @@ carregarBancosOptions(selectBancosSaida,bancoService.bancos);
 carregarMovimentacoes(listaMovimentacoes,movimentacaoServices.movimentacoes);
 carregarSaldoTotal(cardSaldoTotal,bancoService.bancos);
 
+
 // CONTROLLERS
 iniciarBancoController({
     divBancos,
@@ -100,3 +108,13 @@ iniciarMovimentacaoController({
     modalExcluirMovimentacao,
     btnExcluirMovimentacao: document.querySelector('#btn-excluir-movimentacao')
 });
+
+// cod laura ;) //
+
+const containerSaldoTotal = document.querySelector('.saldo-total');
+function atualizarSaldoTotal() {
+    if (!containerSaldoTotal) return;
+    exibirSaldoTotal(containerSaldoTotal, calcularTotalSaldo());
+}
+
+atualizarSaldoTotal();
