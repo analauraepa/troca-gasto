@@ -2,12 +2,11 @@ import * as movimentacoesService from '../services/movimentacao.services.js';
 import * as bancoService from '../services/banco.services.js';
 
 import { carregarMovimentacoes } from '../components/movimentacao.components.js';
-import { carregarBancos, carregarSaldoTotal } from '../components/banco.components.js';
+import { carregarBancos } from '../components/banco.components.js';
 
 export function iniciarMovimentacaoController({
     listaMovimentacoes,
     divBancos,
-    cardSaldoTotal,
     formAddEntrada,
     formAddSaida,
     formEditMovimentacao,
@@ -15,7 +14,8 @@ export function iniciarMovimentacaoController({
     modalAdicionarSaida,
     modalEditMovimentacao,
     modalExcluirMovimentacao,
-    btnExcluirMovimentacao
+    btnExcluirMovimentacao,
+    atualizarResumo
 }) {
     const inputDescricaoEntrada = formAddEntrada.querySelector('#add-descricao-entrada');
     const inputValorEntrada = formAddEntrada.querySelector('#add-valor-entrada');
@@ -35,7 +35,7 @@ export function iniciarMovimentacaoController({
     function atualizarInterface() {
         carregarMovimentacoes(listaMovimentacoes,movimentacoesService.movimentacoes);
         carregarBancos(divBancos, bancoService.bancos);
-        carregarSaldoTotal(cardSaldoTotal, bancoService.bancos);
+        atualizarResumo?.();
     }
 
     //Cada card de movimentação possui um atributo data-index que armazena o índice daquela movimentação no array de movimentações

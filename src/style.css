@@ -376,8 +376,36 @@ main {
 /* AÇÕES RÁPIDAS */
 .quick {
   display: flex;
-  gap: 8px;
+  align-items: center;
+  gap: 10px;
   flex-wrap: wrap;
+}
+
+.quick > a,
+.quick > .dropdown > .btn {
+  display: inline-flex;
+  min-height: 42px;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-size: 12px;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color .2s, border-color .2s, box-shadow .2s, transform .2s;
+}
+
+.quick > a:hover,
+.quick > .dropdown > .btn:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow);
+}
+
+.quick > a:focus-visible,
+.quick > .dropdown > .btn:focus-visible {
+  outline: 3px solid rgba(63, 125, 91, .25);
+  outline-offset: 2px;
 }
 
 
@@ -675,7 +703,7 @@ footer {
     background-color: var(--green-pale);
 }
 
-.modal .modal-footer .btn-primary {
+.modal .modal-footer .btn-nova-mov {
     width: 100%;
     min-height: 42px;
     padding: 10px 14px;
@@ -690,12 +718,12 @@ footer {
     transition: background-color .2s, border-color .2s;
 }
 
-.modal .modal-footer .btn-primary:hover {
+.modal .modal-footer .btn-nova-mov:hover {
     background-color: var(--green-dark);
     border-color: var(--green-dark);
 }
 
-.modal .modal-footer .btn-primary:focus-visible {
+.modal .modal-footer .btn-nova-mov:focus-visible {
     outline: 3px solid rgba(63, 125, 91, .25);
     outline-offset: 2px;
 }
@@ -853,5 +881,3 @@ footer {
         padding: 14px 18px 18px;
     }
 }
-
-

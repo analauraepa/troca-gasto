@@ -35,22 +35,30 @@
 <section>
   <div class="hero">
     <div><h2>Olá, Usuário! 👋</h2><p>Uma visão rápida das suas finanças, contas e cartões.</p></div>
-    <div class="balance"><small>Saldo disponível</small><div class="saldo-total"></div></div>
+
+    <!-- saldo total com o mesmo id da pag de movimentações -->
+    <div class="balance"><small>Saldo disponível</small><div id="card-saldo-total"></div></div>
   </div>
 
-  <div class="section-head"><div><h2>Visão do mês</h2><p>Entradas e saídas de outubro</p></div></div>
+  <div class="section-head"><div><h2>Visão geral</h2><p>Entradas e saídas cadastradas</p></div></div>
   <div class="summary-grid">
     <div class="card summary-card"><div class="label">Receitas</div><div class="value in receitas"></div></div>
-    <div class="card summary-card"><div class="label">Despesas</div><div class="value out saidas">R$ 1.430,00</div></div>
-    <div class="card summary-card"><div class="label">Resultado</div><div class="value in total">R$ 70,00</div></div>
+    <div class="card summary-card"><div class="label">Despesas</div><div class="value out saidas"></div></div>
+    <div class="card summary-card"><div class="label">Resultado</div><div class="value total"></div></div>
     <div class="card summary-card"><div class="label">Faturas dos cartões</div><div class="value out fatura">R$ 2.140,00</div></div>
   </div>
 
   <div class="section-head"><div><h2>Ações rápidas</h2><p>Escolha uma área para cadastrar ou consultar informações.</p></div></div>
   <div class="card"><div class="quick">
-    <a class="btn primary" href="movimentacoes.html">Nova movimentação</a>
-    <a class="btn" href="cartoes.html">Ver cartões</a>
-    <a class="btn" href="contas-fixas.html">Ver contas fixas</a>
+    <div class="dropdown">
+      <button type="button" class="btn primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Nova movimentação</button>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="movimentacoes.html?nova=entrada">Adicionar entrada</a></li>
+        <li><a class="dropdown-item" href="movimentacoes.html?nova=saida">Adicionar saída</a></li>
+      </ul>
+    </div>
+    <a class="btn" href="cartoes.html">Nova compra no cartão</a>
+    <a class="btn" href="contas-fixas.html">Nova conta fixa</a>
   </div></div>
 
   <div class="section-head">

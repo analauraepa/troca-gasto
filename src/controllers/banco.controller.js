@@ -1,12 +1,11 @@
 import * as bancoService from '../services/banco.services.js';
 import * as movimentacoesService from '../services/movimentacao.services.js';
 
-import { carregarBancos, carregarBancosOptions, carregarSaldoTotal } from '../components/banco.components.js';
+import { carregarBancos, carregarBancosOptions } from '../components/banco.components.js';
 import { carregarMovimentacoes } from '../components/movimentacao.components.js';
 
 export function iniciarBancoController({
     divBancos,
-    cardSaldoTotal,
     selectBancosEntrada,
     selectBancosSaida,
     listaMovimentacoes,
@@ -15,7 +14,8 @@ export function iniciarBancoController({
     modalAdicionarBanco,
     modalEditarBanco,
     modalExcluirBanco,
-    btnExcluirBanco
+    btnExcluirBanco,
+    atualizarResumo
 }){
     const inputNomeBanco = formAddBanco.querySelector('#add-nome-banco');
     const inputEditBanco = formEditBanco.querySelector('#edit-nome-banco');
@@ -23,7 +23,8 @@ export function iniciarBancoController({
     //Recarrega os elementos dinâmicos da interface: bancos, movimentações e saldo total
     function atualizarInterface() {
         carregarBancos(divBancos, bancoService.bancos);
-        carregarSaldoTotal(cardSaldoTotal, bancoService.bancos);
+
+        atualizarResumo?.();
 
         carregarBancosOptions(selectBancosEntrada,bancoService.bancos);
         carregarBancosOptions(selectBancosSaida,bancoService.bancos);

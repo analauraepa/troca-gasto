@@ -1,16 +1,29 @@
-// para inserir no elemento do html o total
 
+
+// Exibe o saldo total e aplica sua cor conforme o valor.
 export function exibirSaldoTotal(elemento, total) {
-    const saldototal = document.createElement('strong');
-    saldototal.textContent = `R$ ${Number(total)}`
+    const saldoTotal = document.createElement('strong');
+    const valor = Number(total);
 
-    if (Number(total) >= 0) {
-        saldototal.classList.add('in')
-    } else {
-        saldototal.classList.add('out')
+    saldoTotal.textContent = `R$ ${valor}`;
+    saldoTotal.classList.add(valor >= 0 ? 'in' : 'out');
+
+    elemento.replaceChildren(saldoTotal);
+}
+
+// Exibe receitas, despesas e resultado, aplicando a cor ao resultado.
+export function exibirTotaisMovimentacoes(elementos, totais) {
+    if (elementos.receitas) {
+        elementos.receitas.textContent = `R$ ${Number(totais.receitas)}`;
     }
 
-    elemento.replaceChildren(saldototal);
+    if (elementos.despesas) {
+        elementos.despesas.textContent = `R$ ${Number(totais.despesas)}`;
+    }
 
-    
+    if (elementos.resultado) {
+        elementos.resultado.textContent = `R$ ${Number(totais.resultado)}`;
+        elementos.resultado.classList.toggle('in', totais.resultado >= 0);
+        elementos.resultado.classList.toggle('out', totais.resultado < 0);
+    }
 }

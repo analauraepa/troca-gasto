@@ -24,12 +24,3 @@ export function carregarBancosOptions(selectBancos, bancos){
         `
     });
 }
-
-// Itera sobre o array de bancos e atualiza o saldo total
-export function carregarSaldoTotal(cardSaldoTotal,bancos) {
-    const total = bancos.reduce((acc,banco) => {
-        return acc + banco.saldo;
-    }, 0);
-
-    cardSaldoTotal.innerHTML = `R$ ${total.toFixed(2)}`;
-}

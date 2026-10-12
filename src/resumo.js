@@ -1,27 +1,12 @@
 import './style.css';
 import './bootstrap.scss';
+import 'bootstrap/js/dist/dropdown';
 
-import * as resumoService from './services/resumo.service.js';
-import { exibirSaldoTotal } from './components/resumo.components.js';
+import { iniciarResumoController } from './controllers/resumo.controller.js';
 
-const containerSaldoTotal = document.querySelector('.saldo-total');
-const entradaResumo = document.querySelector('.receitas');
-const saidaResumo = document.querySelector('.saidas');
-const totalResumo = document.querySelector('.total');
-
-function atualizaSaldo(){
-    if (containerSaldoTotal) {
-        exibirSaldoTotal(containerSaldoTotal, resumoService.calcularTotalSaldo());
-    }
-    if (entradaResumo) {
-        entradaResumo.textContent = `R$ ${resumoService.recResumo()}`;
-    }
-    if (saidaResumo) {
-        saidaResumo.textContent = `R$ ${resumoService.saiResumo()}`;
-    }
-    if (totalResumo) {
-        totalResumo.textContent = `R$ ${resumoService.recResumo() - resumoService.saiResumo()}`;
-    }
-}
-
-atualizaSaldo()
+iniciarResumoController({
+    saldoTotal: document.querySelector('#card-saldo-total'),
+    receitas: document.querySelector('.receitas'),
+    despesas: document.querySelector('.saidas'),
+    resultado: document.querySelector('.total')
+});
