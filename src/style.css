@@ -524,6 +524,44 @@ td:last-child, th:last-child {
   gap: 4px;
 }
 
+.item-conta-fixa .actions {
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.fixed-bill-payment {
+  min-height: 32px;
+  padding: 6px 10px;
+  border-color: var(--green);
+  background: var(--green);
+  color: #fff;
+  font-size: 10px;
+  transition: background-color .2s, border-color .2s, box-shadow .2s;
+}
+
+.fixed-bill-payment:hover {
+  border-color: var(--green-dark);
+  background: var(--green-dark);
+  color: #fff;
+}
+
+.fixed-bill-payment.is-paid {
+  border-color: var(--line);
+  background: var(--green-soft);
+  color: var(--green-dark);
+}
+
+.fixed-bill-payment.is-paid:hover {
+  border-color: var(--red);
+  background: var(--red-soft);
+  color: var(--red);
+}
+
+.fixed-bill-payment:focus-visible {
+  outline: 3px solid rgba(63, 125, 91, .25);
+  outline-offset: 2px;
+}
+
 
 /* ÍCONES */
 .mini {

@@ -67,15 +67,15 @@
         <div class="summary-grid" style="grid-template-columns: repeat(3, 1fr)">
           <div class="card summary-card">
             <div class="label">Total mensal</div>
-            <div class="value out">R$ 989,90</div>
+            <div class="value out" id="total-mensal-contas-fixas"></div>
           </div>
           <div class="card summary-card">
             <div class="label">Contas ativas</div>
-            <div class="value">3</div>
+            <div class="value" id="quantidade-contas-ativas"></div>
           </div>
           <div class="card summary-card">
             <div class="label">Pagas neste mês</div>
-            <div class="value in">0</div>
+            <div class="value in" id="quantidade-contas-pagas"></div>
           </div>
         </div>
 
@@ -85,9 +85,9 @@
       </section>
     </main>
 
-    <footer>Protótipo visual com dados fictícios · sem banco de dados</footer>
+    <footer>As contas fixas são salvas neste navegador.</footer>
 
-    <!---Modais-->
+    <!-- Modais de cadastro, edição e exclusão. -->
     <div
       class="modal fade"
       id="modal-conta-fixa"

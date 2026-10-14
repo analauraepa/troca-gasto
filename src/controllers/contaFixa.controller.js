@@ -1,8 +1,12 @@
-// Serviços e componente usados para editar e redesenhar as contas fixas.
-import { contasFixas, editarContaFixa, excluirContaFixa } from '../services/contaFixa.services.js';
-import { carregarContasFixas } from '../components/contaFixa.components.js';
+// Operações sobre as contas fixas.
+import {
+    contasFixas,
+    editarContaFixa,
+    excluirContaFixa,
+    alternarPagamentoContaFixa
+} from '../services/contaFixa.services.js';
 
-// Registra os eventos relacionados à edição de contas fixas.
+// Registra os eventos da lista e dos formulários de contas fixas.
 export function iniciarContaFixaController({
     lista, // Lista das contas fixas.
     formularioEditar, // Formulário do modal de edição.
@@ -10,12 +14,14 @@ export function iniciarContaFixaController({
     selectBancoEditar, // Seletor de banco do formulário.
     modalEditarContaFixa, // Modal de editar contas.
     modalExcluirContaFixa, // Modal para excluir contas.
-    btnExcluirContaFixa  // ação do botão para excluir.
+    btnExcluirContaFixa, // Botão de confirmação da exclusão.
+    atualizarPainel // Atualiza a lista e o resumo.
 }) {
-    
     // Identifica a conta selecionada e preenche o formulário de edição.
     lista.addEventListener('click', event => {
-        const botaoEditar = event.target.closest('[data-bs-target="#modal-editar-conta-fixa"]');
+        const botaoEditar = event.target.closest(
+            '[data-bs-target="#modal-editar-conta-fixa"]'
+        );
 
         // Ignora os cliques que não foram do botão de editar.
         if (!botaoEditar) return;
@@ -31,7 +37,7 @@ export function iniciarContaFixaController({
         // Guarda o índice para usá-lo quando o formulário for enviado.
         formularioEditar.dataset.index = index;
 
-        // Preenche os campos com os dados atuais da conta, para visualizar os dados que existiam antes da modificação.
+        // Preenche os campos com os dados atuais da conta.
         document.querySelector('#editar-conta-descricao').value = conta.descricao;
         document.querySelector('#editar-conta-valor').value = conta.valor;
         datepickerEditar.setDate(conta.dataVencimento);
@@ -52,7 +58,7 @@ export function iniciarContaFixaController({
         // Recupera o índice guardado ao abrir o formulário.
         const index = Number(formularioEditar.dataset.index);
 
-        // Envia os novos valores para o services.
+        // Envia os novos valores ao serviço.
         const editou = editarContaFixa(
             index,
             document.querySelector('#editar-conta-descricao').value.trim(),
@@ -67,15 +73,17 @@ export function iniciarContaFixaController({
         // Não atualiza a interface da página se não encontrou a conta.
         if (!editou) return;
 
-        // Mostra os dados atualizados, limpa o formulário e fecha o modal.
-        carregarContasFixas(lista, contasFixas);
+        // Atualiza lista e resumo, limpa o formulário e fecha o modal.
+        atualizarPainel();
         formularioEditar.reset();
         modalEditarContaFixa.hide();
     });
 
     // Pega qual conta foi escolhida para exclusão.
     lista.addEventListener('click', event => {
-        const botaoExcluir = event.target.closest('[data-bs-target="#modal-excluir-conta-fixa"]');
+        const botaoExcluir = event.target.closest(
+            '[data-bs-target="#modal-excluir-conta-fixa"]'
+        );
 
         if (!botaoExcluir) return;
         const linha = botaoExcluir.closest('.item-conta-fixa');
@@ -84,13 +92,39 @@ export function iniciarContaFixaController({
         btnExcluirContaFixa.dataset.index = linha.dataset.index;
     });
 
-    // Exclui a conta confirmada e atualiza a lista de contas existentes.
+    // Exclui a conta confirmada e atualiza a lista e o resumo.
     btnExcluirContaFixa.addEventListener('click', () => {
         const index = Number(btnExcluirContaFixa.dataset.index);
         const excluiu = excluirContaFixa(index);
         if (!excluiu) return;
 
-        carregarContasFixas(lista, contasFixas);
+        atualizarPainel();
         modalExcluirContaFixa.hide();
+    });
+
+    // Marca ou desmarca a conta como paga no mês atual.
+    lista.addEventListener('click', event => {
+        // Encontra o botão mesmo quando o clique acontece num elemento dentro dele.
+        const botaoPagamento = event.target.closest(
+            '[data-action="alternar-pagamento"]'
+        );
+        if (!botaoPagamento) return;
+
+        // Localiza a conta e pega seu índice na lista de contas.
+        const linha = botaoPagamento.closest('.item-conta-fixa');
+        if (!linha) return;
+        const index = Number(linha.dataset.index);
+
+        // Monta o mês atual no formato AAAA-MM usado pelo serviço.
+        const dataAtual = new Date();
+        const mesAtual = `${dataAtual.getFullYear()}-${String(
+            dataAtual.getMonth() + 1
+        ).padStart(2, '0')}`;
+
+        // Alterna o estado de pagamento e atualiza a lista e o painel se a conta existir.
+        const alterou = alternarPagamentoContaFixa(index, mesAtual);
+        if (!alterou) return;
+
+        atualizarPainel();
     });
 }

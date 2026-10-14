@@ -1,4 +1,4 @@
-// Imports do CSS, Bootstrap, ícones e datepicker.
+//imports para css e bibliotecas da página.
 import './style.css';
 import './bootstrap.scss';
 import Modal from 'bootstrap/js/dist/modal';
@@ -8,27 +8,41 @@ import Datepicker from 'vanillajs-datepicker/Datepicker';
 import ptBR from 'vanillajs-datepicker/locales/pt-BR';
 import 'vanillajs-datepicker/css/datepicker-bs5.css';
 
-// Imports para os serviços, componentes e controller da página.
+//imports para serviços, componentes e controller da página.
 import { iniciarContaFixaController } from './controllers/contaFixa.controller.js';
 import { bancos } from './services/banco.services.js';
 import { adicionarContaFixa, contasFixas } from './services/contaFixa.services.js';
 import { carregarBancosOptions } from './components/banco.components.js';
-import { carregarContasFixas } from './components/contaFixa.components.js';
+import { carregarContasFixas, atualizarResumoContasFixas } from './components/contaFixa.components.js';
 
-// Aqui vai ativar os ícones do Font Awesome usados na lista.
+// Ativa os ícones usados nas ações da lista.
 library.add(faTrash, faPencil);
 dom.watch();
 
 // Elementos principais da página.
-const lista = document.querySelector('#lista-contas-fixas'); //lista de contas fixas
-const selectBanco = document.querySelector('#conta-fixa-banco'); //bancos existentes
-const formulario = document.querySelector('#form-conta-fixa'); //Para criar uma nova conta fixa
-const formularioEditar = document.querySelector('#form-editar-conta-fixa'); //para editar 
-const vencimentoEditar = document.querySelector('#editar-conta-vencimento'); //Editar vencimento
-const selectBancoEditar = document.querySelector('#editar-conta-banco'); //Editar banco
+const lista = document.querySelector('#lista-contas-fixas');
+const selectBanco = document.querySelector('#conta-fixa-banco');
+const formulario = document.querySelector('#form-conta-fixa');
+const formularioEditar = document.querySelector('#form-editar-conta-fixa');
+const vencimentoEditar = document.querySelector('#editar-conta-vencimento');
+const selectBancoEditar = document.querySelector('#editar-conta-banco');
+const elementoTotal = document.querySelector('#total-mensal-contas-fixas');
+const elementoAtivas = document.querySelector('#quantidade-contas-ativas');
+const elementoPagas = document.querySelector('#quantidade-contas-pagas');
 
-// Exibe as contas e preenche os seletores com os bancos cadastrados.
-carregarContasFixas(lista, contasFixas);
+// Atualiza a lista e os indicadores do painel com os dados atuais.
+function atualizarPainel() {
+    carregarContasFixas(lista, contasFixas);
+    atualizarResumoContasFixas(
+        elementoTotal,
+        elementoAtivas,
+        elementoPagas,
+        contasFixas
+    );
+}
+
+// Exibe os dados iniciais e preenche os seletores de banco.
+atualizarPainel();
 carregarBancosOptions(selectBanco, bancos);
 carregarBancosOptions(selectBancoEditar, bancos);
 
@@ -46,14 +60,12 @@ const datepickerEditar = new Datepicker(vencimentoEditar, opcoesDatepicker);
 // Prepara o modal de cadastro.
 const modalContaFixa = new Modal(document.querySelector('#modal-conta-fixa'));
 
-//Prepara o modal de edição
+// Prepara os modais da página.
 const modalEditarContaFixa = new Modal(document.querySelector('#modal-editar-conta-fixa'));
-
-//Prepara o modal de excluir.
 const modalExcluirContaFixa = new Modal(document.querySelector('#modal-excluir-conta-fixa'));
 const btnExcluirContaFixa = document.querySelector('#btn-excluir-conta-fixa');
 
-// Cadastra a conta fixa e atualiza a lista de contas existentes.
+// Cadastra uma conta fixa e atualiza a interface.
 formulario.addEventListener('submit', event => {
     event.preventDefault();
 
@@ -68,12 +80,12 @@ formulario.addEventListener('submit', event => {
         document.querySelector('#conta-fixa-cartao').value
     );
 
-    carregarContasFixas(lista, contasFixas);
+    atualizarPainel();
     formulario.reset();
     modalContaFixa.hide();
 });
 
-// Inicia os eventos de edição das contas fixas.
+// Inicia os eventos de edição, exclusão e pagamento.
 iniciarContaFixaController({
     lista,
     formularioEditar,
@@ -81,5 +93,6 @@ iniciarContaFixaController({
     selectBancoEditar,
     modalEditarContaFixa,
     modalExcluirContaFixa,
-    btnExcluirContaFixa
+    btnExcluirContaFixa,
+    atualizarPainel
 });
