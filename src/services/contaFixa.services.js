@@ -1,19 +1,70 @@
 import { ContaFixa } from "../models/ContaFixa.js";
 
+// Carrega as contas salvas no navegador, caso não tenha nenhuma retorna um array vazio.
 const dadosSalvos = JSON.parse(localStorage.getItem('contasFixas')) || [];
-//Aqui vai carregar as contas do localstorage, caso não exista nenhuma será um array vazio.
-//JSON.parse serve para converter o texto em um array de contas.
 
-export let contasFixas = dadosSalvos.map(conta => new ContaFixa(conta.descricao, conta.valor, conta.diaVencimento, conta.categoria, conta.pagamento, conta.ativa));
-//Aqui tá sendo usado o map para percorrer todos os dados salvos e criar um novo array. (para criar contas na classe ContaFixa)
+// Recria cada conta salva do navegador como uma instância do modelo ContaFixa.
+export let contasFixas = dadosSalvos.map(conta => new ContaFixa(
+    conta.descricao,
+    conta.valor,
+    conta.dataVencimento,
+    conta.categoria,
+    conta.banco,
+    conta.cartao,
+    conta.ativa
+));
 
-export function salvarContasFixas(){
+// Aqui vai salvar a lista atualizada no localStorage como texto JSON(JSON.stringify).
+export function salvarContasFixas() {
     localStorage.setItem('contasFixas', JSON.stringify(contasFixas));
-}//JSON.stringify converte contasFixas em texto e salva no navegador com a chave contasFixas.
+}
 
-export function adicionarContaFixa(descricao, valor, diaVencimento, categoria, pagamento, ativa = true){
-    contasFixas.unshift( 
-        new ContaFixa (descricao, valor, diaVencimento, categoria, pagamento, ativa)
+// Aqui cria uma conta fixa, adiciona no inicio usando unshift e salva.
+export function adicionarContaFixa(
+    descricao,
+    valor,
+    dataVencimento,
+    categoria,
+    banco,
+    cartao,
+    ativa = true
+) {
+    contasFixas.unshift(
+        new ContaFixa(
+            descricao,
+            valor,
+            dataVencimento,
+            categoria,
+            banco,
+            cartao,
+            ativa
+        )
     );
     salvarContasFixas();
-}// a função recebe dados de uma nova conta e adiciona no inicio do array de contas(a nova aparecerá primeiro), depois salva e atualiza no localstorage.
+}
+
+// Atualiza os dados da conta no índice que foi pego e salva a lista.
+export function editarContaFixa(index, descricao, valor, dataVencimento, categoria, banco, cartao, ativa) {
+    const conta = contasFixas[index];
+    if (!conta) return false;
+
+    conta.descricao = descricao;
+    conta.valor = Number(valor);
+    conta.dataVencimento = dataVencimento;
+    conta.categoria = categoria;
+    conta.banco = banco;
+    conta.cartao = cartao;
+    conta.ativa = ativa;
+
+    salvarContasFixas();
+    return true;
+}
+
+// Remove a conta no índice pego e salva a lista atualizada de contas.
+export function excluirContaFixa(index) {
+    if (!contasFixas[index]) return false;
+
+    contasFixas.splice(index, 1);
+    salvarContasFixas();
+    return true;
+}
