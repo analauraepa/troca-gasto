@@ -238,6 +238,7 @@ main {
 
 .balance strong {
   font-size: 25px;
+  color: var(--green-dark);
 }
 
 
@@ -364,48 +365,15 @@ main {
 }
 
 .btn.danger {
-  background-color: var(--red);
-  color: #fff;
-}
-
-.btn.danger:hover {
-  background-color: #a94b4b;
+  color: var(--red);
 }
 
 
 /* AÇÕES RÁPIDAS */
 .quick {
   display: flex;
-  align-items: center;
-  gap: 10px;
+  gap: 8px;
   flex-wrap: wrap;
-}
-
-.quick > a,
-.quick > .dropdown > .btn {
-  display: inline-flex;
-  min-height: 42px;
-  align-items: center;
-  justify-content: center;
-  padding: 10px 16px;
-  border-radius: 10px;
-  font-size: 12px;
-  line-height: 1.2;
-  text-align: center;
-  text-decoration: none;
-  transition: background-color .2s, border-color .2s, box-shadow .2s, transform .2s;
-}
-
-.quick > a:hover,
-.quick > .dropdown > .btn:hover {
-  transform: translateY(-1px);
-  box-shadow: var(--shadow);
-}
-
-.quick > a:focus-visible,
-.quick > .dropdown > .btn:focus-visible {
-  outline: 3px solid rgba(63, 125, 91, .25);
-  outline-offset: 2px;
 }
 
 
@@ -574,14 +542,6 @@ td:last-child, th:last-child {
 }
 
 
-/* DROPDOWNS */
-
-.dropdown-menu .dropdown-item {
-    font-size: 14px;
-    cursor: pointer;
-}
-
-
 /* FOOTER */
 footer {
   text-align: center;
@@ -592,209 +552,60 @@ footer {
 
 
 /* MODAIS */
-.modal .modal-dialog {
-    max-width: 440px;
-    margin: 1.5rem auto;
-    padding: 0 12px;
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(24,49,39,.42);
+  backdrop-filter: blur(3px);
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  z-index: 100;
 }
 
-.modal .modal-content {
-    background-color: var(--card);
-    color: var(--text);
-    border: 1px solid var(--line);
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: var(--shadow-lg);
+.modal {
+  width: min(430px, 100%);
+  background: #fff;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--line);
 }
 
-.modal .modal-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 22px 24px 18px;
-    border-bottom: 1px solid var(--line);
+.modal h3 {
+  margin: 0 0 15px;
+  font-size: 17px;
 }
 
-.modal .modal-title {
-    margin: 0;
-    color: var(--text);
-    font-family: inherit;
-    font-size: 18px;
-    font-weight: 700;
+.field {
+  display: grid;
+  gap: 5px;
+  margin-bottom: 10px;
 }
 
-.modal .btn-close {
-    width: fit-content;
-    height: fit-content;
-    padding: 0;
-    margin: 0;
-    border: none;
-    background-color: transparent;
-    color: var(--muted);
-    font-size: 20px;
+.field label {
+  font-size: 10px;
+  color: var(--muted);
+  font-weight: 600;
 }
 
-.modal .modal-body {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-    padding: 22px 24px;
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 15px;
 }
 
-.modal .modal-form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 7px;
+.check {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 10px;
+  color: var(--muted);
 }
 
-.modal .form-label {
-    margin: 0;
-    color: var(--text);
-    font-size: 12px;
-    font-weight: 600;
-}
-
-.modal .invalid-feedback {
-    color: var(--red);
-    font-size: 12px;
-}
-
-.modal .invalid-feedback.hide {
-    display: none;
-}
-
-.modal .form-control {
-    width: 100%;
-    min-height: 42px;
-    padding: 10px 12px;
-    border: 1px solid var(--line);
-    border-radius: 9px;
-    background-color: var(--bg);
-    color: var(--text);
-    font-family: inherit;
-    font-size: 12px;
-    box-shadow: none;
-    transition: border-color .2s, box-shadow .2s;
-}
-
-.modal .form-control.red {
-    border-color: var(--red);
-}
-
-.modal .form-control::placeholder {
-    color: #93a198;
-}
-
-#modal-editar-movimentacao .form-control::placeholder {
-    color: var(--text);
-    opacity: 1;
-}
-
-.modal .form-control:focus {
-    border-color: var(--green);
-    background-color: #fff;
-    box-shadow: 0 0 0 3px rgba(63, 125, 91, .12);
-    outline: none;
-}
-
-.modal .modal-footer {
-    padding: 16px 24px 22px;
-    border-top: 1px solid var(--line);
-    background-color: var(--green-pale);
-}
-
-.modal .modal-footer .btn-nova-mov {
-    width: 100%;
-    min-height: 42px;
-    padding: 10px 14px;
-    border: 1px solid var(--green);
-    border-radius: 9px;
-    background-color: var(--green);
-    color: #fff;
-    font-family: inherit;
-    font-size: 12px;
-    font-weight: 600;
-    box-shadow: none;
-    transition: background-color .2s, border-color .2s;
-}
-
-.modal .modal-footer .btn-nova-mov:hover {
-    background-color: var(--green-dark);
-    border-color: var(--green-dark);
-}
-
-.modal .modal-footer .btn-nova-mov:focus-visible {
-    outline: 3px solid rgba(63, 125, 91, .25);
-    outline-offset: 2px;
-}
-
-.modal .modal-content {
-    animation: modal-entrada .2s ease-out;
-}
-
-@keyframes modal-entrada {
-    from {
-        opacity: 0;
-        transform: translateY(8px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-
-/* DATEPICKER */
-.datepicker-picker {
-    border: 1px solid #dce7e0;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.10);
-    width: 260px;
-    height: 240px;
-    min-width: 100px;
-    box-sizing: border-box;
-}
-
-.datepicker-header .datepicker-controls {
-    padding: 4px;
-    gap: 4px;
-}
-
-.datepicker-header .datepicker-controls .button {
-    height: 28px;
-    min-height: 28px;
-    padding: 2px 8px;
-    font-size: 12px;
-    font-weight: 500;
-    color: #243b30;
-    background-color: #e5f1e9;
-    border: 1px solid #dce7e0;
-    border-radius: 4px;
-    box-shadow: none;
-}
-
-.datepicker-header .datepicker-controls .button:hover {
-    background-color: #dcebe1;
-    border-color: #cbded1;
-}
-
-.datepicker-cell {
-    height: 25px;
-    font-size: 12px;
-}
-
-.datepicker-cell.selected,
-.datepicker-cell.selected:hover {
-    background-color: var(--green);
-    color: #fff;
-}
-
-/* Dia selecionado ao receber foco */
-.datepicker-cell.selected.focused {
-    background-color: var(--green-dark);
-    color: #fff;
+.check input {
+  accent-color: var(--green);
 }
 
 
@@ -868,406 +679,4 @@ footer {
   }
 }
 
-@media (max-width: 480px) {
-    .modal .modal-header {
-        padding: 18px 18px 15px;
-    }
 
-    .modal .modal-body {
-        padding: 20px 18px;
-    }
-
-    .modal .modal-footer {
-        padding: 14px 18px 18px;
-    }
-}
-
-
-.compra-card {
-    padding: 18px;
-    margin-bottom: 14px;
-    border: 1px solid #dce8e0;
-    border-radius: 16px;
-    background: #fff;
-}
-
-.compra-card-top {
-    display: flex;
-    justify-content: space-between;
-    gap: 12px;
-}
-
-.compra-progresso {
-    height: 8px;
-    margin: 14px 0 12px;
-    overflow: hidden;
-    border-radius: 999px;
-    background: #e7eee9;
-}
-
-.compra-progresso-preenchimento {
-    height: 100%;
-    border-radius: inherit;
-    background: #438765;
-    transition: width 0.3s ease;
-}
-
-.compra-etiquetas {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-}
-
-.compra-etiqueta {
-    padding: 5px 9px;
-    border-radius: 999px;
-    font-size: 11px;
-}
-
-.compra-etiqueta.paga {
-    color: #32694b;
-    background: #eaf4ed;
-}
-
-.compra-etiqueta.futura {
-    color: #496b58;
-    background: #f0f5f1;
-}
-
-.chips .chip {
-    border: none;
-    font-family: inherit;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-.chips .chip:hover {
-    background: var(--green-soft);
-}
-
-.chips .chip:focus-visible {
-    outline: 2px solid var(--green);
-    outline-offset: 2px;
-}
-
-
-/* Cards de compras responsivos */
-#lista-compras-cartao {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    width: 100%;
-    gap: 0;
-}
-
-#lista-compras-cartao .compra-card,
-#lista-compras-cartao .card {
-    width: 100%;
-    min-width: 0;
-    margin: 0 0 14px;
-    box-sizing: border-box;
-}
-
-/* Evita que textos grandes estourem o card */
-#lista-compras-cartao .compra-card-top {
-    min-width: 0;
-}
-
-#lista-compras-cartao .compra-card-top > div {
-    min-width: 0;
-    overflow-wrap: anywhere;
-}
-
-/* Ajustes para telas pequenas */
-@media (max-width: 600px) {
-    #lista-compras-cartao .compra-card {
-        padding: 15px;
-    }
-
-    #lista-compras-cartao .small {
-        line-height: 1.6;
-    }
-
-    #lista-compras-cartao .chips {
-        gap: 6px;
-    }
-}
-
-
-/* Parcelas da fatura: visual de tabela */
-#lista-parcelas-fatura {
-  width: 100%;
-  max-width: 100%;
-  box-sizing: border-box;
-  overflow-x: auto;
-  font-size: 13px;
-  color: #34483b;
-}
-
-/* Linha de cada parcela */
-#lista-parcelas-fatura .linha-parcela-fatura {
-  display: grid;
-  grid-template-columns: minmax(150px, 1fr) 100px 130px;
-  align-items: center;
-  gap: 12px;
-  padding: 12px;
-  border-bottom: 1px solid #e3eae5;
-  background: #fff;
-  min-width: 430px;
-  box-sizing: border-box;
-}
-
-#lista-parcelas-fatura .linha-parcela-fatura:nth-child(even) {
-  background: #f8faf8;
-}
-
-/* Descrição */
-#lista-parcelas-fatura .descricao-parcela {
-  min-width: 0;
-  overflow-wrap: anywhere;
-}
-
-/* Valor */
-#lista-parcelas-fatura .valor-parcela {
-  text-align: right;
-  white-space: nowrap;
-  font-weight: 600;
-}
-
-/* Botão de pagamento */
-#lista-parcelas-fatura .botao-pagamento {
-  border: 1px solid #438765;
-  border-radius: 8px;
-  padding: 8px 10px;
-  background: #438765;
-  color: #fff;
-  font-size: 12px;
-  cursor: pointer;
-  white-space: nowrap;
-}
-
-#lista-parcelas-fatura .botao-pagamento:hover {
-  background: #32694b;
-}
-
-/* Parcela já paga */
-#lista-parcelas-fatura .botao-pagamento.paga {
-  background: #e2f3e7;
-  border-color: #b9ddc4;
-  color: #28653e;
-}
-
-/* Telas pequenas */
-@media (max-width: 480px) {
-  #lista-parcelas-fatura .linha-parcela-fatura {
-    grid-template-columns: minmax(140px, 1fr) 90px 120px;
-    gap: 8px;
-    padding: 10px 8px;
-  }
-}
-
-
-/* Tabela de parcelas futuras */
-#lista-parcelas-futuras {
-    width: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
-    overflow-x: auto;
-    font-size: 14px;
-    color: #34483c;
-}
-
-/* Título de cada mês */
-#lista-parcelas-futuras h4 {
-    margin: 20px 0 0;
-    padding: 10px 12px;
-    background: #eaf2ec;
-    color: #28583d;
-    font-size: 14px;
-    font-weight: 700;
-    border: 1px solid #d5e3d8;
-    border-bottom: none;
-    border-radius: 8px 8px 0 0;
-    text-transform: capitalize;
-}
-
-/* Cada linha da tabela */
-#lista-parcelas-futuras .linha-parcela-fatura {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto auto;
-    align-items: center;
-    gap: 16px;
-    padding: 12px;
-    border: 1px solid #e0e8e2;
-    border-top: none;
-    background: #fff;
-}
-
-/* Alternância de cores das linhas */
-#lista-parcelas-futuras .linha-parcela-fatura:nth-child(even) {
-    background: #f7faf8;
-}
-
-/* Descrição da compra */
-#lista-parcelas-futuras .descricao-parcela {
-    min-width: 0;
-    overflow-wrap: anywhere;
-    font-size: 13px;
-}
-
-/* Valor da parcela */
-#lista-parcelas-futuras .valor-parcela {
-    text-align: right;
-    white-space: nowrap;
-    font-size: 13px;
-    font-weight: 700;
-}
-
-/* Status do pagamento */
-#lista-parcelas-futuras .status-parcela {
-    display: inline-block;
-    padding: 5px 9px;
-    border-radius: 20px;
-    font-size: 11px;
-    font-weight: 600;
-    text-align: center;
-    white-space: nowrap;
-}
-
-#lista-parcelas-futuras .status-parcela.paga {
-    color: #24613b;
-    background: #e0f3e5;
-}
-
-#lista-parcelas-futuras .status-parcela.pendente {
-    color: #8a6200;
-    background: #fff1c7;
-}
-
-/* Cantos inferiores da tabela */
-#lista-parcelas-futuras .linha-parcela-fatura:last-child {
-    border-radius: 0 0 8px 8px;
-}
-
-/* Ajustes para telas pequenas */
-@media (max-width: 600px) {
-    #lista-parcelas-futuras .linha-parcela-fatura {
-        grid-template-columns: minmax(0, 1fr) auto;
-        gap: 8px;
-        padding: 10px;
-    }
-
-    #lista-parcelas-futuras .descricao-parcela {
-        grid-column: 1 / -1;
-    }
-
-    #lista-parcelas-futuras .valor-parcela {
-        text-align: left;
-    }
-}
-
-
-/* ===== Registrar compras ===== */
-
-#form-adicionar-compra {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 18px;
-    width: 100%;
-    max-width: 850px;
-    margin: 20px auto;
-    padding: 26px;
-    box-sizing: border-box;
-    background: #ffffff;
-    border: 1px solid #e0e9e2;
-    border-radius: 18px;
-    box-shadow: 0 6px 22px rgba(40, 80, 55, 0.07);
-}
-
-/* Rótulos dos campos */
-#form-adicionar-compra label {
-    display: block;
-    margin-bottom: 7px;
-    color: #34483c;
-    font-size: 13px;
-    font-weight: 600;
-}
-
-/* Campos de texto, valores, datas e seletores */
-#form-adicionar-compra input,
-#form-adicionar-compra select {
-    display: block;
-    width: 100%;
-    min-height: 44px;
-    padding: 10px 12px;
-    box-sizing: border-box;
-    color: #26382c;
-    background-color: #fbfdfb;
-    border: 1px solid #d5e1d8;
-    border-radius: 9px;
-    font-family: inherit;
-    font-size: 14px;
-    transition: border-color 0.2s, box-shadow 0.2s;
-}
-
-/* Destaque ao selecionar um campo */
-#form-adicionar-compra input:focus,
-#form-adicionar-compra select:focus {
-    outline: none;
-    border-color: #438765;
-    box-shadow: 0 0 0 3px rgba(67, 135, 101, 0.13);
-    background-color: #ffffff;
-}
-
-/* Espaçamento consistente */
-#form-adicionar-compra input::placeholder {
-    color: #9aa99e;
-}
-
-/* Botão de registrar */
-#form-adicionar-compra button[type="submit"] {
-    grid-column: 1 / -1;
-    width: 100%;
-    min-height: 46px;
-    margin-top: 4px;
-    padding: 12px 18px;
-    color: #ffffff;
-    background: #367852;
-    border: none;
-    border-radius: 10px;
-    font-size: 15px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: background 0.2s, transform 0.2s;
-}
-
-#form-adicionar-compra button[type="submit"]:hover {
-    background: #285f40;
-    transform: translateY(-1px);
-}
-
-#form-adicionar-compra button[type="submit"]:active {
-    transform: translateY(0);
-}
-
-/* Mensagens de sucesso e erro */
-#mensagem-compras {
-    width: 100%;
-    max-width: 850px;
-    margin: 12px auto;
-    box-sizing: border-box;
-    border-radius: 10px;
-}
-
-/* Ajuste para celular */
-@media (max-width: 600px) {
-    #form-adicionar-compra {
-        grid-template-columns: 1fr;
-        gap: 14px;
-        padding: 18px;
-        margin: 14px auto;
-    }
-
-    #form-adicionar-compra button[type="submit"] {
-        grid-column: 1;
-    }
-}
