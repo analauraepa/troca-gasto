@@ -40,8 +40,45 @@
 
   <div class="card" style="margin-bottom:15px">
     <div class="between">
-      <div><div class="label">Visualizar fatura</div><div class="small">Mês selecionado: outubro de 2026.</div></div>
-      <select class="month" disabled><option>outubro de 2026</option></select>
+      <div>
+        <div class="label">Visualizar fatura</div>
+        <div class="small">Mês selecionado: outubro de 2026.</div></div>
+      <input type="month" class="month" id="mes-fatura" value="2026-10">
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:15px">
+    <div class="label">Total da fatura selecionada</div>
+    <div class="value out" id="total-fatura-mes">R$ 0,00</div>
+
+    <div class="small" id="quantidade-parcelas-mes">
+        Nenhuma parcela encontrada.
+    </div>
+
+    <hr>
+
+    <div class="label">Total pago</div>
+    <div class="value" id="total-pago-mes">R$ 0,00</div>
+
+    <div class="label">Total pendente</div>
+    <div class="value out" id="total-pendente-mes">R$ 0,00</div>
+  </div>
+
+  <div class="card" style="margin-bottom: 20px">
+    <h3>Parcelas da fatura</h3>
+
+    <div id="lista-parcelas-fatura">
+      Selecione um mês para visualizar as parcelas da fatura.
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom: 20px">
+    <h3>Próximas parcelas</h3>
+
+    <p class="small">Veja as cobranças previstas para os meses segunintes.</p>
+
+    <div id="lista-parcelas-futuras">
+      Carregando parcelas futuras...
     </div>
   </div>
 
@@ -78,23 +115,81 @@
     </div>
   </div>
 
-  <div class="section-head"><div><h2>Compras no cartão</h2><p>Consulte compras à vista e parceladas feitas nos seus cartões.</p></div></div>
+  <div class="section-head">
+    <div>
+      <h2>Compras no cartão</h2>
+      <p>Consulte compras à vista e parceladas feitas nos seus cartões.</p>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom: 20px;">
+    <h3>Registrar Compra</h3>
+    <p class="small">Cadastre uma compra à vista ou parcelada no cartão.</p>
+
+    <form id="form-adicionar-compra">
+      <div class="modal-form-group">
+        <label for="descricao-compra" class="form-label">Descrição da compra</label>
+        <input type="text" 
+        class="form-control" 
+        id="descricao-compra" 
+        placeholder="Ex.: Notebook" 
+        required>
+      </div>
+
+      <div class="modal-form-group">
+        <label for="valor-compra" class="form-label">Valor da compra (R$)</label>
+        <input type="number" 
+        class="form-control" 
+        id="valor-compra" 
+        placeholder="0,00" 
+        min="0" 
+        step="0.01"
+        required>
+      </div>
+
+      <div class="modal-form-group">
+        <label for="data-compra" class="form-label">Data da compra</label>
+        <input type="date"
+        class="form-control"
+        id="data-compra"
+        required>
+      </div>
+
+      <div class="modal-form-group">
+        <label for="cartao-compra" class="form-label">Cartão utilizado</label>
+        <select class="form-control" id="cartao-compra" required>
+          <option value="">Selecione um cartão</option>
+        </select>
+      </div>
+
+      <div class="modal-form-group">
+        <label for="parcelas-compra" class="form-label">Quantidade de parcelas</label>
+        <input type="number" 
+        class="form-control" 
+        id="parcelas-compra" 
+        min="1" 
+        step="1"
+        value="1"
+        required>
+
+        <div class="small">
+          Se informar 1, a compra será registrada como à vista.
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary">
+        Registrar compra
+      </button>
+    </form>
+  </div>
+
+  <div id="mensagem-compras" role="status" aria-live="polite"></div>
   
   <div class="card installment">
     <div class="between">
-      <div><div class="row-title">Geladeira nova</div><div class="small">R$ 3.100,00 · 10x de R$ 310,00 · Nubank · 03/08/2026</div></div>
-      <div class="actions"><a class="mini" href="cartoes.html" aria-label="Editar"><i class="fa-solid fa-pencil" style="color: #3f7d5b;"></i></a><a class="mini" href="cartoes.html" aria-label="Excluir"><i class="fa-solid fa-trash" style="color: #c85b5b;"></i></a></div>
-    </div>
-    <div class="progress"><span style="width:20%"></span></div>
-    <div class="chips"><span class="chip">paga</span><span class="chip">paga</span><span class="chip">futura</span><span class="chip">futura</span></div>
-  </div>
-  <div class="card installment">
-    <div class="between">
-      <div><div class="row-title">Curso online</div><div class="small">R$ 600,00 · 6x de R$ 100,00 · Atacadão · 02/10/2026</div></div>
-      <div class="actions"><a class="mini" href="cartoes.html" aria-label="Editar"><i class="fa-solid fa-pencil" style="color: #3f7d5b;"></i></a><a class="mini" href="cartoes.html" aria-label="Excluir"><i class="fa-solid fa-trash" style="color: #c85b5b;"></i></a></div>
-    </div>
-    <div class="progress"><span style="width:17%"></span></div>
-    <div class="chips"><span class="chip">paga</span><span class="chip">paga</span><span class="chip">futura</span><span class="chip">futura</span></div>
+      <div id="lista-compras-cartao">
+        <!-- Os cards das compras serão criados pelo JavaScript -->
+      </div>
   </div>
 </section>
 
