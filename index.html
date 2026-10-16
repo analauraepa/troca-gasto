@@ -61,52 +61,17 @@
     </div>
     <!-- !!para linkar!! -->
     <a class="btn" href="cartoes.html">Nova compra no cartão</a>
-    <a class="btn" href="contas-fixas.html">Nova conta fixa</a>
+    <a class="btn" href="contas-fixas.html?nova=conta-fixa">Nova conta fixa</a>
   </div></div>
 
   <div class="section-head">
     <div><h2>Próximas contas</h2><p>As contas mais próximas do vencimento.</p></div>
-    <div class="small">R$ 1.049,90 pendente</div>
+    <div class="small">Total pendente: <span id="total-contas-pendentes"></span></div>
   </div>
-  <div class="card">
-    <div class="bill"><div class="row-top">
-      <div><div class="row-title">Aluguel</div><div class="small">Vencimento 10/10/2026 · recorrente</div></div>
-      <div style="text-align:right"><strong>R$ 800,00</strong><div><span class="badge yellow">conta</span></div></div>
-    </div></div><div class="bill"><div class="row-top">
-      <div><div class="row-title">Internet</div><div class="small">Vencimento 12/10/2026</div></div>
-      <div style="text-align:right"><strong>R$ 99,90</strong><div><span class="badge yellow">conta</span></div></div>
-    </div></div><div class="bill"><div class="row-top">
-      <div><div class="row-title">Energia</div><div class="small">Vencimento 20/10/2026</div></div>
-      <div style="text-align:right"><strong>R$ 150,00</strong><div><span class="badge yellow">conta</span></div></div>
-    </div></div>
-  </div>
+  <div class="card" id="proximas-contas"></div>
 
   <div class="section-head"><div><h2>Últimas movimentações</h2><p>Entradas e saídas mais recentes.</p></div><a class="btn" href="movimentacoes.html">ver mais</a></div>
-  <div class="card"><div class="list">
-<div class="list-row">
-  <div><div class="row-title">Salário</div><div class="small">05/10/2026 · Salário · Nubank</div></div>
-  <div style="text-align:right"><strong class="in">+R$ 1.420,00</strong></div>
-</div>
-<div class="list-row">
-  <div><div class="row-title">Pix recebido</div><div class="small">02/10/2026 · Outros · Mercado Pago</div></div>
-  <div style="text-align:right"><strong class="in">+R$ 80,00</strong></div>
-</div>
-<div class="list-row">
-  <div><div class="row-title">Gasolina</div><div class="small">04/10/2026 · Transporte · Nubank</div></div>
-  <div style="text-align:right"><strong class="out">−R$ 300,00</strong></div>
-</div>
-<div class="list-row">
-  <div><div class="row-title">Aluguel</div><div class="small">06/10/2026 · Casa · Nubank</div></div>
-  <div style="text-align:right"><strong class="out">−R$ 800,00</strong></div>
-</div>
-<div class="list-row">
-  <div><div class="row-title">Spotify</div><div class="small">06/10/2026 · Assinaturas · Nubank</div></div>
-  <div style="text-align:right"><strong class="out">−R$ 20,00</strong></div>
-</div>
-<div class="list-row">
-  <div><div class="row-title">Geladeira nova — 2/10</div><div class="small">03/10/2026 · Casa · cartão Nubank</div></div>
-  <div style="text-align:right"><strong class="out">−R$ 310,00</strong></div>
-</div></div></div>
+  <div class="card"><div class="list" id="ultimas-movimentacoes"></div></div>
 </section>
 
 </main>

@@ -4,8 +4,18 @@ import * as movimentacaoService from "./movimentacao.services.js"
 //Cria um array de objetos apartir dos dados salvos no localStorage, caso não haja dados, cria um array vazio
 const dados = JSON.parse(localStorage.getItem("bancos")) || [];
 
-//Cria um array de instâncias de Banco.js a partir do array dados
-export let bancos = dados.map(banco => new Banco(banco.nome, Number(banco.saldo)));
+// restaura o saldo inicial e o saldo atual de cada banco salvo
+export let bancos = dados.map(banco => {
+    // usa o saldo atual como inicial caso o registro antigo não tenha saldoInicial
+    const saldoInicial = Number(banco.saldoInicial ?? banco.saldo);
+
+    // cria a instância do banco com o saldo inicial
+    const bancoRestaurado = new Banco(banco.nome, saldoInicial);
+
+    // preserva o saldo atual salvo, que pode ser diferente do saldo inicial
+    bancoRestaurado.saldo = Number(banco.saldo ?? saldoInicial);
+    return bancoRestaurado;
+});
 
 //Transforma o array bancos em texto e salva no localStorage
 export function salvarBancos() {
