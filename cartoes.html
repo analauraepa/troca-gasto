@@ -40,22 +40,59 @@
 
   <div class="card" style="margin-bottom:15px">
     <div class="between">
-      <div><div class="label">Visualizar fatura</div><div class="small">Mês selecionado: outubro de 2026.</div></div>
-      <select class="month" disabled><option>outubro de 2026</option></select>
+      <div>
+        <div class="label">Visualizar fatura</div>
+        <div class="small">Mês selecionado: outubro de 2026.</div></div>
+      <input type="month" class="month" id="mes-fatura" value="2026-10">
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:15px">
+    <div class="label">Total da fatura selecionada</div>
+    <div class="value out" id="total-fatura-mes">R$ 0,00</div>
+
+    <div class="small" id="quantidade-parcelas-mes">
+        Nenhuma parcela encontrada.
+    </div>
+
+    <hr>
+
+    <div class="label">Total pago</div>
+    <div class="value" id="total-pago-mes">R$ 0,00</div>
+
+    <div class="label">Total pendente</div>
+    <div class="value out" id="total-pendente-mes">R$ 0,00</div>
+  </div>
+
+  <div class="card" style="margin-bottom: 20px">
+    <h3>Parcelas da fatura</h3>
+
+    <div id="lista-parcelas-fatura">
+      Selecione um mês para visualizar as parcelas da fatura.
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom: 20px">
+    <h3>Próximas parcelas</h3>
+
+    <p class="small">Veja as cobranças previstas para os meses segunintes.</p>
+
+    <div id="lista-parcelas-futuras">
+      Carregando parcelas futuras...
     </div>
   </div>
 
   <div class="summary-grid" style="grid-template-columns:repeat(3,1fr)">
     <div class="card summary-card"><div class="label">Fatura total</div><div class="value out">R$ 2.140,00</div><div class="small">todos os cartões em outubro de 2026</div></div>
-    <div class="card summary-card"><div class="label">Limite total</div><div class="value">R$ 6.800,00</div></div>
+    <div class="card summary-card"><div class="label">Limite total</div><div class="value" id="limite-total-cartoes">R$ 0,00</div></div>
     <div class="card summary-card"><div class="label">Limite disponível</div><div class="value in">R$ 4.660,00</div></div>
   </div>
 
   <div class="section-head">
     <div><h2>Faturas por cartão</h2><p>O valor previsto de cada cartão no mês selecionado.</p></div>
-    <a class="btn primary" href="cartoes.html">+ Adicionar cartão</a>
+    <button type="button" class="btn primary" data-bs-toggle="modal" data-bs-target="#modal-adicionar-cartao">+ Adicionar cartão</button>
   </div>
-  <div class="grid3">
+  <div class="grid3" id="cartoes">
     <div class="card">
       <div class="bank-top"><span class="bank-name">Nubank</span><div class="actions">
         <a class="mini" href="cartoes.html" aria-label="Editar"><i class="fa-solid fa-pencil" style="color: #3f7d5b;"></i></a><a class="mini" href="cartoes.html" aria-label="Excluir"><i class="fa-solid fa-trash" style="color: #c85b5b;"></i></a>
@@ -78,28 +115,173 @@
     </div>
   </div>
 
-  <div class="section-head"><div><h2>Compras no cartão</h2><p>Consulte compras à vista e parceladas feitas nos seus cartões.</p></div></div>
+  <div class="section-head">
+    <div>
+      <h2>Compras no cartão</h2>
+      <p>Consulte compras à vista e parceladas feitas nos seus cartões.</p>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom: 20px;">
+    <h3>Registrar Compra</h3>
+    <p class="small">Cadastre uma compra à vista ou parcelada no cartão.</p>
+
+    <form id="form-adicionar-compra">
+      <div class="modal-form-group">
+        <label for="descricao-compra" class="form-label">Descrição da compra</label>
+        <input type="text" 
+        class="form-control" 
+        id="descricao-compra" 
+        placeholder="Ex.: Notebook" 
+        required>
+      </div>
+
+      <div class="modal-form-group">
+        <label for="valor-compra" class="form-label">Valor da compra (R$)</label>
+        <input type="number" 
+        class="form-control" 
+        id="valor-compra" 
+        placeholder="0,00" 
+        min="0" 
+        step="0.01"
+        required>
+      </div>
+
+      <div class="modal-form-group">
+        <label for="data-compra" class="form-label">Data da compra</label>
+        <input type="date"
+        class="form-control"
+        id="data-compra"
+        required>
+      </div>
+
+      <div class="modal-form-group">
+        <label for="cartao-compra" class="form-label">Cartão utilizado</label>
+        <select class="form-control" id="cartao-compra" required>
+          <option value="">Selecione um cartão</option>
+        </select>
+      </div>
+
+      <div class="modal-form-group">
+        <label for="parcelas-compra" class="form-label">Quantidade de parcelas</label>
+        <input type="number" 
+        class="form-control" 
+        id="parcelas-compra" 
+        min="1" 
+        step="1"
+        value="1"
+        required>
+
+        <div class="small">
+          Se informar 1, a compra será registrada como à vista.
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary">
+        Registrar compra
+      </button>
+    </form>
+  </div>
+
+  <div id="mensagem-compras" role="status" aria-live="polite"></div>
   
   <div class="card installment">
     <div class="between">
-      <div><div class="row-title">Geladeira nova</div><div class="small">R$ 3.100,00 · 10x de R$ 310,00 · Nubank · 03/08/2026</div></div>
-      <div class="actions"><a class="mini" href="cartoes.html" aria-label="Editar"><i class="fa-solid fa-pencil" style="color: #3f7d5b;"></i></a><a class="mini" href="cartoes.html" aria-label="Excluir"><i class="fa-solid fa-trash" style="color: #c85b5b;"></i></a></div>
-    </div>
-    <div class="progress"><span style="width:20%"></span></div>
-    <div class="chips"><span class="chip">paga</span><span class="chip">paga</span><span class="chip">futura</span><span class="chip">futura</span></div>
-  </div>
-  <div class="card installment">
-    <div class="between">
-      <div><div class="row-title">Curso online</div><div class="small">R$ 600,00 · 6x de R$ 100,00 · Atacadão · 02/10/2026</div></div>
-      <div class="actions"><a class="mini" href="cartoes.html" aria-label="Editar"><i class="fa-solid fa-pencil" style="color: #3f7d5b;"></i></a><a class="mini" href="cartoes.html" aria-label="Excluir"><i class="fa-solid fa-trash" style="color: #c85b5b;"></i></a></div>
-    </div>
-    <div class="progress"><span style="width:17%"></span></div>
-    <div class="chips"><span class="chip">paga</span><span class="chip">paga</span><span class="chip">futura</span><span class="chip">futura</span></div>
+      <div id="lista-compras-cartao">
+        <!-- Os cards das compras serão criados pelo JavaScript -->
+      </div>
   </div>
 </section>
 
 </main>
+
+<div class="modal fade" id="modal-adicionar-cartao" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Adicionar cartão</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+      </div>
+      <form id="form-adicionar-cartao" novalidate>
+        <div class="modal-body">
+          <div class="modal-form-group">
+            <label for="adicionar-nome-cartao" class="form-label">Nome do cartão</label>
+            <input type="text" class="form-control" id="adicionar-nome-cartao" placeholder="Ex.: Nubank" required>
+            <div class="invalid-feedback hide">Insira o nome do cartão.</div>
+          </div>
+          <div class="modal-form-group">
+            <label for="adicionar-valor-fatura" class="form-label">Valor da fatura</label>
+            <input type="number" class="form-control" id="adicionar-valor-fatura" placeholder="0,00" min="0" step="0.01">
+          </div>
+          <div class="modal-form-group">
+            <label for="adicionar-limite-total" class="form-label">Limite total</label>
+            <input type="number" class="form-control" id="adicionar-limite-total" placeholder="0,00" min="0" step="0.01">
+          </div>
+          <div class="modal-form-group">
+            <label for="adicionar-data-vencimento" class="form-label">Data de vencimento</label>
+            <input type="text" class="form-control" id="adicionar-data-vencimento" placeholder="dd/mm/aaaa" autocomplete="off">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Adicionar cartão</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modal-editar-cartao" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Editar cartão</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+      </div>
+      <form id="form-editar-cartao" novalidate>
+        <div class="modal-body">
+          <div class="modal-form-group">
+            <label for="editar-nome-cartao" class="form-label">Nome do cartão</label>
+            <input type="text" class="form-control" id="editar-nome-cartao" required>
+            <div class="invalid-feedback hide">Insira o nome do cartão.</div>
+          </div>
+          <div class="modal-form-group">
+            <label for="editar-valor-fatura" class="form-label">Valor da fatura</label>
+            <input type="number" class="form-control" id="editar-valor-fatura" min="0" step="0.01">
+          </div>
+          <div class="modal-form-group">
+            <label for="editar-limite-total" class="form-label">Limite total</label>
+            <input type="number" class="form-control" id="editar-limite-total" min="0" step="0.01">
+          </div>
+          <div class="modal-form-group">
+            <label for="editar-data-vencimento" class="form-label">Data de vencimento</label>
+            <input type="text" class="form-control" id="editar-data-vencimento" placeholder="dd/mm/aaaa" autocomplete="off">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Salvar alterações</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modal-excluir-cartao" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Excluir cartão</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+      </div>
+      <div class="modal-body">Tem certeza de que deseja excluir este cartão?</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-danger" id="btn-excluir-cartao">Excluir cartão</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <footer>Protótipo visual com dados fictícios · sem banco de dados</footer>
-<script type="module" src="/src/main.js"></script>
+<script type="module" src="/src/cartoes.js"></script>
 </body>
 </html>
