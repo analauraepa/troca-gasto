@@ -11,9 +11,14 @@ import { faTrash, faPencil } from '@fortawesome/free-solid-svg-icons';
 
 import { iniciar_cartao_controller } from './controllers/cartao.controller.js';
 import * as cartaoService from './services/cartao.services.js';
+import * as resumoService from './services/resumo.service.js';
 import * as compraService from './services/compra.services.js';
 import { listar_parcelas, consultar_fatura_mes, alterar_estado_parcela, } from './services/faturas.services.js';
 import { carregar_cartoes, carregar_compras_cartao } from './components/cartao.components.js';
+import {
+    exibirTotalFaturasCartoes,
+    exibirMesFaturasCartoes
+} from './components/resumo.components.js';
 
 library.add(faTrash, faPencil);
 dom.watch();
@@ -38,6 +43,23 @@ const modal_excluir = new Modal(document.querySelector('#modal-excluir-cartao'))
 
 const valor_limite_total = document.querySelector('#limite-total-cartoes');
 const valor_limite_disponivel = document.querySelector('#limite-disponivel-cartoes');
+const valor_total_faturas = document.querySelector('#total-faturas-cartoes');
+
+// atualiza o total conjunto dos cartões para o mês selecionado
+function atualizar_total_faturas() {
+    // usa o mês escolhido no campo de consulta das faturas
+    const mesSelecionado = document.querySelector('#mes-fatura').value;
+
+    // calcula a soma das parcelas e exibe também o mês correspondente
+    exibirTotalFaturasCartoes(
+        valor_total_faturas,
+        resumoService.calcularTotalFaturasCartoes(mesSelecionado)
+    );
+    exibirMesFaturasCartoes(
+        document.querySelector('#mes-total-faturas-cartoes'),
+        mesSelecionado
+    );
+}
 
 function atualizar_limite_total() {
     valor_limite_total.textContent = new Intl.NumberFormat('pt-BR', 
@@ -185,6 +207,7 @@ if (form_compra){
             // Atualiza a lista de compras de cartões disponiveis.
             carregar_cartoes_no_select();
             atualizar_fatura_mes();
+            atualizar_total_faturas();
             atualizar_parcela_futuras();
             atualizar_lista_compras_cartao();
             atualizar_cartoes();
@@ -300,10 +323,12 @@ const campoMesFatura = document.querySelector('#mes-fatura');
 if (campoMesFatura) {
     campoMesFatura.addEventListener('change', () => {
         atualizar_fatura_mes();
+        atualizar_total_faturas();
         atualizar_parcela_futuras();
     });
 
     atualizar_fatura_mes();
+    atualizar_total_faturas();
     atualizar_parcela_futuras();
 }
 

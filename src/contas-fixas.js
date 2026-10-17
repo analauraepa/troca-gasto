@@ -60,6 +60,13 @@ const datepickerEditar = new Datepicker(vencimentoEditar, opcoesDatepicker);
 // Prepara o modal de cadastro.
 const modalContaFixa = new Modal(document.querySelector('#modal-conta-fixa'));
 
+// necessário para o resumo - verifica se a url tem atributo de nova
+// (atribuido no link do html) com valor de conta-fixa
+if (new URLSearchParams(window.location.search).get('nova') === 'conta-fixa') {
+    // mostra o modal
+    modalContaFixa.show();
+}
+
 // Prepara os modais da página.
 const modalEditarContaFixa = new Modal(document.querySelector('#modal-editar-conta-fixa'));
 const modalExcluirContaFixa = new Modal(document.querySelector('#modal-excluir-conta-fixa'));

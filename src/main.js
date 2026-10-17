@@ -31,7 +31,10 @@ Object.assign(Datepicker.locales, ptBR);
 // ELEMENTOS COMPARTILHADOS
 const divBancos = document.querySelector('#banks');
 const cardSaldoTotal = document.querySelector('#card-saldo-total');
-const atualizarResumo = iniciarResumoController({ saldoTotal: cardSaldoTotal });
+const atualizarResumo = iniciarResumoController({
+    saldoTotal: cardSaldoTotal,
+    totalContasPendentes: document.querySelector('#total-contas-pendentes')
+});
 const selectBancosEntrada = document.querySelector('#add-banco-entrada');
 const selectBancosSaida = document.querySelector('#add-banco-saida');
 const listaMovimentacoes = document.querySelector('#lista-movimentacoes');
@@ -110,7 +113,9 @@ iniciarMovimentacaoController({
 // abre o formulário solicitado pelo dropdown de ações rápidas do resumo
 
 // new URLSearchParams é um objeto nativo do js para ler e manipular url
-// o parâmetro "window.location.search" procura tudo que vier depois do ? e guarda o valor da nova
+// o parâmetro "window.location.search" procura tudo que vier depois do ? e guarda o valor 
+// de nova, variável atribuida no html
+
 const movimentacaoSolicitada = new URLSearchParams(window.location.search).get('nova');
 
 
@@ -119,7 +124,6 @@ if (movimentacaoSolicitada === 'entrada') {
     modalAdicionarEntrada.show();
 
 } else if (movimentacaoSolicitada === 'saida') {
-
     modalAdicionarSaida.show();
 }
 
