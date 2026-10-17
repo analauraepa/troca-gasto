@@ -51,12 +51,15 @@
   <div class="section-head"><div><h2>Ações rápidas</h2><p>Escolha uma área para cadastrar ou consultar informações.</p></div></div>
   <div class="card"><div class="quick">
     <div class="dropdown">
+      <!-- data-bs-toggle é um atributo do bootstrap -->
       <button type="button" class="btn primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Nova movimentação</button>
       <ul class="dropdown-menu">
+        <!-- redireciona para a pagina de movimentações, dependendo da escolha -->
         <li><a class="dropdown-item" href="movimentacoes.html?nova=entrada">Adicionar entrada</a></li>
         <li><a class="dropdown-item" href="movimentacoes.html?nova=saida">Adicionar saída</a></li>
       </ul>
     </div>
+    <!-- !!para linkar!! -->
     <a class="btn" href="cartoes.html">Nova compra no cartão</a>
     <a class="btn" href="contas-fixas.html">Nova conta fixa</a>
   </div></div>

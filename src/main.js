@@ -107,12 +107,19 @@ iniciarMovimentacaoController({
     atualizarResumo
 });
 
+// abre o formulário solicitado pelo dropdown de ações rápidas do resumo
 
-// Abre o formulário solicitado pelo dropdown de ações rápidas do resumo.
+// new URLSearchParams é um objeto nativo do js para ler e manipular url
+// o parâmetro "window.location.search" procura tudo que vier depois do ? e guarda o valor da nova
 const movimentacaoSolicitada = new URLSearchParams(window.location.search).get('nova');
+
+
 if (movimentacaoSolicitada === 'entrada') {
+    // abre a janela/modal de entrada sobre a página
     modalAdicionarEntrada.show();
+
 } else if (movimentacaoSolicitada === 'saida') {
+
     modalAdicionarSaida.show();
 }
 

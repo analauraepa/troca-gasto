@@ -1,109 +1,339 @@
 <!doctype html>
 <html lang="pt-BR">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Contas Fixas — Protótipo</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-</head>
-<body>
-<header>
-  <div class="brand"><span class="brand-dot"></span>Finanças</div>
-  
-<nav>
-  <a href="index.html" class="nav-link resumo">Resumo</a>
-  <a href="movimentacoes.html" class="nav-link movimentacoes">Movimentações</a>
-  <a href="cartoes.html" class="nav-link cartoes">Cartões</a>
-  <a href="contas-fixas.html" class="nav-link fixas on">Contas fixas</a>
-</nav>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Contas Fixas — Protótipo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="brand"><span class="brand-dot"></span>Finanças</div>
 
-  <div class="header-actions">
-    <a class="icon-btn" href="alertas.html" title="Alertas" aria-label="Alertas">🔔</a>
-    <a class="avatar" href="perfil.html" title="Perfil" aria-label="Perfil">U</a>
-  </div>
-</header>
-<main>
-  <div class="page-top">
-    <div>
-      <h1>Contas Fixas</h1>
-      <p>Seu dinheiro organizado de forma simples.</p>
+      <nav>
+        <a href="index.html" class="nav-link resumo">Resumo</a>
+        <a href="movimentacoes.html" class="nav-link movimentacoes"
+          >Movimentações</a
+        >
+        <a href="cartoes.html" class="nav-link cartoes">Cartões</a>
+        <a href="contas-fixas.html" class="nav-link fixas on">Contas fixas</a>
+      </nav>
+
+      <div class="header-actions">
+        <a
+          class="icon-btn"
+          href="alertas.html"
+          title="Alertas"
+          aria-label="Alertas"
+          >🔔</a
+        >
+        <a class="avatar" href="perfil.html" title="Perfil" aria-label="Perfil"
+          >U</a
+        >
+      </div>
+    </header>
+    <main>
+      <div class="page-top">
+        <div>
+          <h1>Contas Fixas</h1>
+          <p>Seu dinheiro organizado de forma simples.</p>
+        </div>
+      </div>
+
+      <section>
+        <div class="section-head" style="margin-top: 0">
+          <div>
+            <h2>Contas fixas</h2>
+            <p>
+              Gastos que se repetem todos os meses. O pagamento é feito por uma
+              conta ou cartão escolhido pelo usuário.
+            </p>
+          </div>
+          <button
+            class="btn primary"
+            type="button"
+            data-bs-toggle="modal"
+            data-bs-target="#modal-conta-fixa"
+          >
+            + Nova conta fixa
+          </button>
+        </div>
+
+        <div class="summary-grid" style="grid-template-columns: repeat(3, 1fr)">
+          <div class="card summary-card">
+            <div class="label">Total mensal</div>
+            <div class="value out" id="total-mensal-contas-fixas"></div>
+          </div>
+          <div class="card summary-card">
+            <div class="label">Contas ativas</div>
+            <div class="value" id="quantidade-contas-ativas"></div>
+          </div>
+          <div class="card summary-card">
+            <div class="label">Pagas neste mês</div>
+            <div class="value in" id="quantidade-contas-pagas"></div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top: 15px">
+          <div class="list" id="lista-contas-fixas"></div>
+        </div>
+      </section>
+    </main>
+
+    <footer>As contas fixas são salvas neste navegador.</footer>
+
+    <!-- Modais de cadastro, edição e exclusão. -->
+    <div
+      class="modal fade"
+      id="modal-conta-fixa"
+      tabindex="-1"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Nova conta fixa</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Fechar"
+            >
+              &times;
+            </button>
+          </div>
+          <form id="form-conta-fixa" novalidate>
+            <div class="modal-body">
+              <div class="modal-form-group">
+                <label for="conta-fixa-descricao" class="form-label"
+                  >Descrição</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="conta-fixa-descricao"
+                  placeholder="Ex.: Aluguel"
+                  required
+                />
+                <div class="invalid-feedback hide">Insira uma descrição.</div>
+              </div>
+              <div class="modal-form-group">
+                <label for="conta-fixa-valor" class="form-label">Valor</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="conta-fixa-valor"
+                  placeholder="0,00"
+                  min="0.01"
+                  step="0.01"
+                  required
+                />
+                <div class="invalid-feedback hide">Insira um valor válido.</div>
+              </div>
+              <div class="modal-form-group">
+                <label for="conta-fixa-vencimento" class="form-label"
+                  >Data de vencimento</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="conta-fixa-vencimento"
+                  placeholder="DD/MM/AAAA"
+                  required
+                  readonly
+                />
+                <div class="invalid-feedback hide">
+                  Insira uma data de vencimento.
+                </div>
+              </div>
+              <div class="modal-form-group">
+                <label for="conta-fixa-categoria" class="form-label"
+                  >Categoria</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="conta-fixa-categoria"
+                  placeholder="Ex.: Casa"
+                  required
+                />
+                <div class="invalid-feedback hide">Insira uma categoria.</div>
+              </div>
+              <div class="modal-form-group">
+                <label for="conta-fixa-banco" class="form-label">Banco</label>
+                <select id="conta-fixa-banco">
+                  <option value="">Selecione um banco</option>
+                </select>
+              </div>
+              <div class="modal-form-group">
+                <label for="conta-fixa-cartao" class="form-label">Cartão</label>
+                <select id="conta-fixa-cartao">
+                  <option value="">Selecione um cartão</option>
+                </select>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary">
+                Adicionar conta fixa
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
-  </div>
-  
-<section>
-  <div class="section-head" style="margin-top:0">
-    <div><h2>Contas fixas</h2><p>Gastos que se repetem todos os meses. O pagamento é feito por uma conta ou cartão escolhido pelo usuário.</p></div>
-    <a class="btn primary" href="contas-fixas.html">+ Nova conta fixa</a>
-  </div>
 
-  <div class="summary-grid" style="grid-template-columns:repeat(3,1fr)">
-    <div class="card summary-card"><div class="label">Total mensal</div><div class="value out">R$ 989,90</div></div>
-    <div class="card summary-card"><div class="label">Contas ativas</div><div class="value">3</div></div>
-    <div class="card summary-card"><div class="label">Pagas neste mês</div><div class="value in">0</div></div>
-  </div>
+    <div
+      class="modal fade"
+      id="modal-editar-conta-fixa"
+      tabindex="-1"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Editar conta fixa</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Fechar"
+            >
+              &times;
+            </button>
+          </div>
 
-  <div class="card" style="margin-top:15px">
-    <div class="list">
-      <div class="list-row">
-        <div>
-          <div class="row-title">Aluguel</div>
-          <div class="small">Todo dia 10 · Casa · Conta: Nubank <span class="badge ">ativa</span></div>
-        </div>
-        <div style="text-align:right">
-          <strong>R$ 800,00</strong>
-          <div class="actions" style="margin-top:6px">
-            <a class="mini" href="contas-fixas.html" aria-label="Editar"><i class="fa-solid fa-pencil" style="color: #3f7d5b;"></i></a>
-            <a class="mini" href="contas-fixas.html" aria-label="Excluir"><i class="fa-solid fa-trash" style="color: #c85b5b;"></i></a>
-          </div>
+          <form id="form-editar-conta-fixa" novalidate>
+            <div class="modal-body">
+              <div class="modal-form-group">
+                <label for="editar-conta-descricao" class="form-label"
+                  >Descrição</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="editar-conta-descricao"
+                  required
+                />
+              </div>
+
+              <div class="modal-form-group">
+                <label for="editar-conta-valor" class="form-label">Valor</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="editar-conta-valor"
+                  min="0.01"
+                  step="0.01"
+                  required
+                />
+              </div>
+
+              <div class="modal-form-group">
+                <label for="editar-conta-vencimento" class="form-label"
+                  >Data de vencimento
+                </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="editar-conta-vencimento"
+                  placeholder="DD/MM/AAAA"
+                  required
+                  readonly
+                />
+              </div>
+
+              <div class="modal-form-group">
+                <label for="editar-conta-categoria" class="form-label"
+                  >Categoria
+                </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="editar-conta-categoria"
+                  required
+                />
+              </div>
+
+              <div class="modal-form-group">
+                <label for="editar-conta-banco" class="form-label">Banco</label>
+                <select id="editar-conta-banco"></select>
+              </div>
+
+              <div class="modal-form-group">
+                <label for="editar-conta-cartao" class="form-label"
+                  >Cartão</label
+                >
+                <select id="editar-conta-cartao">
+                  <option value="">Selecione um cartão</option>
+                </select>
+              </div>
+
+              <div class="modal-form-group">
+                <label for="editar-conta-ativa" class="form-label"
+                  >Status</label
+                >
+                <select id="editar-conta-ativa">
+                  <option value="true">Ativa</option>
+                  <option value="false">Inativa</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary">
+                Salvar alterações
+              </button>
+            </div>
+          </form>
         </div>
       </div>
-      <div class="list-row">
-        <div>
-          <div class="row-title">Luz</div>
-          <div class="small">Todo dia 20 · Casa · Conta: Mercado Pago <span class="badge ">ativa</span></div>
-        </div>
-        <div style="text-align:right">
-          <strong>R$ 150,00</strong>
-          <div class="actions" style="margin-top:6px">
-            <a class="mini" href="contas-fixas.html" aria-label="Editar"><i class="fa-solid fa-pencil" style="color: #3f7d5b;"></i></a>
-            <a class="mini" href="contas-fixas.html" aria-label="Excluir"><i class="fa-solid fa-trash" style="color: #c85b5b;"></i></a>
+    </div>
+
+    <div
+      class="modal fade"
+      id="modal-excluir-conta-fixa"
+      tabindex="-1"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Excluir conta fixa</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Fechar"
+            >
+              &times;
+            </button>
           </div>
-        </div>
-      </div>
-      <div class="list-row">
-        <div>
-          <div class="row-title">Streaming</div>
-          <div class="small">Todo dia 25 · Assinaturas · Cartão: Nubank <span class="badge ">ativa</span></div>
-        </div>
-        <div style="text-align:right">
-          <strong>R$ 39,90</strong>
-          <div class="actions" style="margin-top:6px">
-            <a class="mini" href="contas-fixas.html" aria-label="Editar"><i class="fa-solid fa-pencil" style="color: #3f7d5b;"></i></a>
-            <a class="mini" href="contas-fixas.html" aria-label="Excluir"><i class="fa-solid fa-trash" style="color: #c85b5b;"></i></a>
+
+          <div class="modal-body">
+            <p>Tem certeza de que deseja excluir esta conta fixa?</p>
           </div>
-        </div>
-      </div>
-      <div class="list-row">
-        <div>
-          <div class="row-title">Água</div>
-          <div class="small">Todo dia 28 · Casa · Conta: Nubank <span class="badge red">inativa</span></div>
-        </div>
-        <div style="text-align:right">
-          <strong>R$ 80,00</strong>
-          <div class="actions" style="margin-top:6px">
-            <a class="mini" href="contas-fixas.html" aria-label="Editar"><i class="fa-solid fa-pencil" style="color: #3f7d5b;"></i></a>
-            <a class="mini" href="contas-fixas.html" aria-label="Excluir"><i class="fa-solid fa-trash" style="color: #c85b5b;"></i></a>
+
+          <div class="modal-footer">
+            <button type="button" class="btn" data-bs-dismiss="modal">
+              Cancelar
+            </button>
+            <button
+              type="button"
+              class="btn danger"
+              id="btn-excluir-conta-fixa"
+            >
+              Excluir
+            </button>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
 
-</main>
-<footer>Protótipo visual com dados fictícios · sem banco de dados</footer>
-<script type="module" src="/src/main.js"></script>
-</body>
+    <script type="module" src="/src/contas-fixas.js"></script>
+  </body>
 </html>
