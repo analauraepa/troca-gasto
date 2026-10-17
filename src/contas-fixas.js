@@ -14,6 +14,8 @@ import { bancos } from './services/banco.services.js';
 import { adicionarContaFixa, contasFixas } from './services/contaFixa.services.js';
 import { carregarBancosOptions } from './components/banco.components.js';
 import { carregarContasFixas, atualizarResumoContasFixas } from './components/contaFixa.components.js';
+import { cartoes } from './services/cartao.services.js';
+import { carregar_cartoes_options } from './components/cartao.components.js';
 
 // Ativa os ícones usados nas ações da lista.
 library.add(faTrash, faPencil);
@@ -29,6 +31,9 @@ const selectBancoEditar = document.querySelector('#editar-conta-banco');
 const elementoTotal = document.querySelector('#total-mensal-contas-fixas');
 const elementoAtivas = document.querySelector('#quantidade-contas-ativas');
 const elementoPagas = document.querySelector('#quantidade-contas-pagas');
+const selectCartao = document.querySelector('#conta-fixa-cartao');
+const selectCartaoEditar = document.querySelector('#editar-conta-cartao');
+
 
 // Atualiza a lista e os indicadores do painel com os dados atuais.
 function atualizarPainel() {
@@ -45,6 +50,8 @@ function atualizarPainel() {
 atualizarPainel();
 carregarBancosOptions(selectBanco, bancos);
 carregarBancosOptions(selectBancoEditar, bancos);
+carregar_cartoes_options(selectCartao, cartoes);
+carregar_cartoes_options(selectCartaoEditar, cartoes);
 
 // Configura os campos de vencimento no formato DD/MM/AAAA.
 Object.assign(Datepicker.locales, ptBR);

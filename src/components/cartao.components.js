@@ -17,6 +17,18 @@ export function carregar_cartoes(divCartoes, cartoes, calcular_limite_disponivel
     });
 }
 
+//Para conseguir selecionar um cartão em contas fixas.
+export function carregar_cartoes_options(select, cartoes) {
+    select.innerHTML = '<option value="">Selecione um cartão</option>';
+
+    cartoes.forEach(cartao => {
+        const option = document.createElement('option');
+        option.value = cartao.nome;
+        option.textContent = cartao.nome;
+        select.append(option);
+    });
+}
+
 export function carregar_compras_cartao(
     listaCompras,
     compras,
