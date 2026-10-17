@@ -1,9 +1,10 @@
 import * as cartaoService from '../services/cartao.services.js';
-import { carregar_cartoes, carregar_cartoes_options } from '../components/cartao.components.js';
+import { carregar_cartoes } from '../components/cartao.components.js';
 
 
 export function iniciar_cartao_controller({
     atualizar_limite_total,
+    atualizar_limite_disponivel,
     divCartoes,
     form_adicionar_cartao,
     form_editar_cartao,
@@ -20,8 +21,9 @@ export function iniciar_cartao_controller({
 
     //Recarrega os elementos dinâmicos da interface: cartoes
     function atualizar_cartao_interface() {
-        carregar_cartoes(divCartoes, cartaoService.cartoes);
+        carregar_cartoes(divCartoes, cartaoService.cartoes, cartaoService.calcular_limite_disponivel, cartaoService.calcular_limite_disponivel_total);
         atualizar_limite_total();
+        atualizar_limite_disponivel();
     }
 
     divCartoes.addEventListener('click', (event) => {

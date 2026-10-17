@@ -37,13 +37,29 @@ const modal_editar = new Modal(document.querySelector('#modal-editar-cartao'));
 const modal_excluir = new Modal(document.querySelector('#modal-excluir-cartao'));
 
 const valor_limite_total = document.querySelector('#limite-total-cartoes');
+const valor_limite_disponivel = document.querySelector('#limite-disponivel-cartoes');
+
 function atualizar_limite_total() {
     valor_limite_total.textContent = new Intl.NumberFormat('pt-BR', 
         { style: 'currency', currency: 'BRL',
          }).format(cartaoService.calcular_limite_total());
     }
 
-carregar_cartoes(divCartoes, cartaoService.cartoes);
+function atualizar_limite_disponivel() {
+    valor_limite_disponivel.textContent = new Intl.NumberFormat('pt-BR', 
+        { style: 'currency', currency: 'BRL',
+         }).format(cartaoService.calcular_limite_disponivel_total());
+    }
+
+
+//atualiza os cartoes sempre que uma compra ou pagamento mudar o limite
+function atualizar_cartoes() {
+    carregar_cartoes(divCartoes, cartaoService.cartoes, cartaoService.calcular_limite_disponivel);
+}
+
+atualizar_cartoes();
+atualizar_limite_total();
+atualizar_limite_disponivel();
 
 const listaComprasCartao = document.querySelector('#lista-compras-cartao');
 
@@ -77,9 +93,12 @@ function atualizar_lista_compras_cartao() {
 
 atualizar_lista_compras_cartao();
 atualizar_limite_total();
+atualizar_limite_disponivel();
+
 
 iniciar_cartao_controller({
     atualizar_limite_total,
+    atualizar_limite_disponivel,
     divCartoes,
     form_adicionar_cartao: document.querySelector('#form-adicionar-cartao'),
     form_editar_cartao: document.querySelector('#form-editar-cartao'),
@@ -87,6 +106,7 @@ iniciar_cartao_controller({
     modal_editar_cartao: modal_editar,
     modal_excluir_cartao: modal_excluir,
     btn_excluir_cartao: document.querySelector('#btn-excluir-cartao'),
+
 });
 
 // Localiza o formulário de compras no HTML
@@ -167,6 +187,8 @@ if (form_compra){
             atualizar_fatura_mes();
             atualizar_parcela_futuras();
             atualizar_lista_compras_cartao();
+            atualizar_cartoes();
+
         
         } catch (error) {
             // Exibe o motivo caso o cadastro falhe.
@@ -254,6 +276,8 @@ function atualizar_fatura_mes() {
 
             botao.addEventListener('click', () => {
                 alterar_estado_parcela(parcela.id);
+                atualizar_cartoes();
+                atualizar_limite_disponivel();
                 atualizar_fatura_mes();
                 atualizar_parcela_futuras();
                 atualizar_lista_compras_cartao();
@@ -370,6 +394,8 @@ function atualizar_parcela_futuras() {
 
             botao.addEventListener('click', () => {
                 alterar_estado_parcela(parcela.id);
+                atualizar_cartoes();
+                atualizar_limite_disponivel();
                 atualizar_fatura_mes();
                 atualizar_parcela_futuras();
                 atualizar_lista_compras_cartao();

@@ -1,4 +1,4 @@
-export function carregar_cartoes(divCartoes, cartoes) {
+export function carregar_cartoes(divCartoes, cartoes, calcular_limite_disponivel) {
     divCartoes.innerHTML = '';
     cartoes.forEach((cartao, index) => {
         divCartoes.innerHTML += `
@@ -10,18 +10,9 @@ export function carregar_cartoes(divCartoes, cartoes) {
             <div class="small" style="margin-top:12px">Fatura total</div>
             <div class="cartao-balance">R$ ${cartao.valor_fatura.toFixed(2)}</div>
             <div class="small">Limite total: R$ ${cartao.limite_total.toFixed(2)}</div>
-            <div class="small">Limite disponível: R$ ${cartao.calcular_limite_disponivel().toFixed(2)}</div>
+            <div class="small">Limite disponível: R$ ${calcular_limite_disponivel(cartao).toFixed(2)}</div>
             <div class="small" style="margin-top:4px">Vencimento: ${cartao.data_vencimento || 'Não informado'}</div>
         </div>
-        `
-    });
-}
-
-export function carregar_cartoes_options(selectCartoes, cartoes){
-    selectCartoes.innerHTML = '';
-    cartoes.forEach((cartao) => {
-        selectCartoes.innerHTML += `
-        <option value="${cartao.nome}">${cartao.nome}</option>
         `
     });
 }
