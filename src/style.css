@@ -919,3 +919,393 @@ footer {
         padding: 14px 18px 18px;
     }
 }
+
+
+.compra-card {
+    padding: 18px;
+    margin-bottom: 14px;
+    border: 1px solid #dce8e0;
+    border-radius: 16px;
+    background: #fff;
+}
+
+.compra-card-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.compra-progresso {
+    height: 8px;
+    margin: 14px 0 12px;
+    overflow: hidden;
+    border-radius: 999px;
+    background: #e7eee9;
+}
+
+.compra-progresso-preenchimento {
+    height: 100%;
+    border-radius: inherit;
+    background: #438765;
+    transition: width 0.3s ease;
+}
+
+.compra-etiquetas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.compra-etiqueta {
+    padding: 5px 9px;
+    border-radius: 999px;
+    font-size: 11px;
+}
+
+.compra-etiqueta.paga {
+    color: #32694b;
+    background: #eaf4ed;
+}
+
+.compra-etiqueta.futura {
+    color: #496b58;
+    background: #f0f5f1;
+}
+
+.chips .chip {
+    border: none;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.chips .chip:hover {
+    background: var(--green-soft);
+}
+
+.chips .chip:focus-visible {
+    outline: 2px solid var(--green);
+    outline-offset: 2px;
+}
+
+
+/* Cards de compras responsivos */
+#lista-compras-cartao {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    width: 100%;
+    gap: 0;
+}
+
+#lista-compras-cartao .compra-card,
+#lista-compras-cartao .card {
+    width: 100%;
+    min-width: 0;
+    margin: 0 0 14px;
+    box-sizing: border-box;
+}
+
+/* Evita que textos grandes estourem o card */
+#lista-compras-cartao .compra-card-top {
+    min-width: 0;
+}
+
+#lista-compras-cartao .compra-card-top > div {
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+/* Ajustes para telas pequenas */
+@media (max-width: 600px) {
+    #lista-compras-cartao .compra-card {
+        padding: 15px;
+    }
+
+    #lista-compras-cartao .small {
+        line-height: 1.6;
+    }
+
+    #lista-compras-cartao .chips {
+        gap: 6px;
+    }
+}
+
+
+/* Parcelas da fatura: visual de tabela */
+#lista-parcelas-fatura {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-x: auto;
+  font-size: 13px;
+  color: #34483b;
+}
+
+/* Linha de cada parcela */
+#lista-parcelas-fatura .linha-parcela-fatura {
+  display: grid;
+  grid-template-columns: minmax(150px, 1fr) 100px 130px;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-bottom: 1px solid #e3eae5;
+  background: #fff;
+  min-width: 430px;
+  box-sizing: border-box;
+}
+
+#lista-parcelas-fatura .linha-parcela-fatura:nth-child(even) {
+  background: #f8faf8;
+}
+
+/* Descrição */
+#lista-parcelas-fatura .descricao-parcela {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* Valor */
+#lista-parcelas-fatura .valor-parcela {
+  text-align: right;
+  white-space: nowrap;
+  font-weight: 600;
+}
+
+/* Botão de pagamento */
+#lista-parcelas-fatura .botao-pagamento {
+  border: 1px solid #438765;
+  border-radius: 8px;
+  padding: 8px 10px;
+  background: #438765;
+  color: #fff;
+  font-size: 12px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+#lista-parcelas-fatura .botao-pagamento:hover {
+  background: #32694b;
+}
+
+/* Parcela já paga */
+#lista-parcelas-fatura .botao-pagamento.paga {
+  background: #e2f3e7;
+  border-color: #b9ddc4;
+  color: #28653e;
+}
+
+/* Telas pequenas */
+@media (max-width: 480px) {
+  #lista-parcelas-fatura .linha-parcela-fatura {
+    grid-template-columns: minmax(140px, 1fr) 90px 120px;
+    gap: 8px;
+    padding: 10px 8px;
+  }
+}
+
+
+/* Tabela de parcelas futuras */
+#lista-parcelas-futuras {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-x: auto;
+    font-size: 14px;
+    color: #34483c;
+}
+
+/* Título de cada mês */
+#lista-parcelas-futuras h4 {
+    margin: 20px 0 0;
+    padding: 10px 12px;
+    background: #eaf2ec;
+    color: #28583d;
+    font-size: 14px;
+    font-weight: 700;
+    border: 1px solid #d5e3d8;
+    border-bottom: none;
+    border-radius: 8px 8px 0 0;
+    text-transform: capitalize;
+}
+
+/* Cada linha da tabela */
+#lista-parcelas-futuras .linha-parcela-fatura {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    align-items: center;
+    gap: 16px;
+    padding: 12px;
+    border: 1px solid #e0e8e2;
+    border-top: none;
+    background: #fff;
+}
+
+/* Alternância de cores das linhas */
+#lista-parcelas-futuras .linha-parcela-fatura:nth-child(even) {
+    background: #f7faf8;
+}
+
+/* Descrição da compra */
+#lista-parcelas-futuras .descricao-parcela {
+    min-width: 0;
+    overflow-wrap: anywhere;
+    font-size: 13px;
+}
+
+/* Valor da parcela */
+#lista-parcelas-futuras .valor-parcela {
+    text-align: right;
+    white-space: nowrap;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+/* Status do pagamento */
+#lista-parcelas-futuras .status-parcela {
+    display: inline-block;
+    padding: 5px 9px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    text-align: center;
+    white-space: nowrap;
+}
+
+#lista-parcelas-futuras .status-parcela.paga {
+    color: #24613b;
+    background: #e0f3e5;
+}
+
+#lista-parcelas-futuras .status-parcela.pendente {
+    color: #8a6200;
+    background: #fff1c7;
+}
+
+/* Cantos inferiores da tabela */
+#lista-parcelas-futuras .linha-parcela-fatura:last-child {
+    border-radius: 0 0 8px 8px;
+}
+
+/* Ajustes para telas pequenas */
+@media (max-width: 600px) {
+    #lista-parcelas-futuras .linha-parcela-fatura {
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 8px;
+        padding: 10px;
+    }
+
+    #lista-parcelas-futuras .descricao-parcela {
+        grid-column: 1 / -1;
+    }
+
+    #lista-parcelas-futuras .valor-parcela {
+        text-align: left;
+    }
+}
+
+
+/* ===== Registrar compras ===== */
+
+#form-adicionar-compra {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+    width: 100%;
+    max-width: 850px;
+    margin: 20px auto;
+    padding: 26px;
+    box-sizing: border-box;
+    background: #ffffff;
+    border: 1px solid #e0e9e2;
+    border-radius: 18px;
+    box-shadow: 0 6px 22px rgba(40, 80, 55, 0.07);
+}
+
+/* Rótulos dos campos */
+#form-adicionar-compra label {
+    display: block;
+    margin-bottom: 7px;
+    color: #34483c;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* Campos de texto, valores, datas e seletores */
+#form-adicionar-compra input,
+#form-adicionar-compra select {
+    display: block;
+    width: 100%;
+    min-height: 44px;
+    padding: 10px 12px;
+    box-sizing: border-box;
+    color: #26382c;
+    background-color: #fbfdfb;
+    border: 1px solid #d5e1d8;
+    border-radius: 9px;
+    font-family: inherit;
+    font-size: 14px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+/* Destaque ao selecionar um campo */
+#form-adicionar-compra input:focus,
+#form-adicionar-compra select:focus {
+    outline: none;
+    border-color: #438765;
+    box-shadow: 0 0 0 3px rgba(67, 135, 101, 0.13);
+    background-color: #ffffff;
+}
+
+/* Espaçamento consistente */
+#form-adicionar-compra input::placeholder {
+    color: #9aa99e;
+}
+
+/* Botão de registrar */
+#form-adicionar-compra button[type="submit"] {
+    grid-column: 1 / -1;
+    width: 100%;
+    min-height: 46px;
+    margin-top: 4px;
+    padding: 12px 18px;
+    color: #ffffff;
+    background: #367852;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+
+#form-adicionar-compra button[type="submit"]:hover {
+    background: #285f40;
+    transform: translateY(-1px);
+}
+
+#form-adicionar-compra button[type="submit"]:active {
+    transform: translateY(0);
+}
+
+/* Mensagens de sucesso e erro */
+#mensagem-compras {
+    width: 100%;
+    max-width: 850px;
+    margin: 12px auto;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+
+/* Ajuste para celular */
+@media (max-width: 600px) {
+    #form-adicionar-compra {
+        grid-template-columns: 1fr;
+        gap: 14px;
+        padding: 18px;
+        margin: 14px auto;
+    }
+
+    #form-adicionar-compra button[type="submit"] {
+        grid-column: 1;
+    }
+}

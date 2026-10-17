@@ -14,13 +14,12 @@ import { faTrash, faPencil } from '@fortawesome/free-solid-svg-icons';
 import { iniciarBancoController } from './controllers/banco.controller.js';
 import { iniciarMovimentacaoController } from './controllers/movimentacao.controller.js';
 
+
 import * as bancoService from './services/banco.services.js';
 import * as movimentacaoServices from './services/movimentacao.services.js'
 
-
 import { carregarBancos, carregarBancosOptions } from './components/banco.components.js';
 import { carregarMovimentacoes } from './components/movimentacao.components.js';
-
 import { iniciarResumoController } from './controllers/resumo.controller.js';
 
 
@@ -55,6 +54,7 @@ const opcoesData = {
     maxDate: new Date()
 };
 
+
 new Datepicker(
     document.querySelector('#add-data-entrada'),
     { ...opcoesData }
@@ -69,6 +69,7 @@ new Datepicker(
     document.querySelector('#edit-data-movimentacao'),
     { ...opcoesData }
 );
+
 
 // RENDERIZAÇÃO INICIAL
 carregarBancos(divBancos, bancoService.bancos);
@@ -110,7 +111,6 @@ iniciarMovimentacaoController({
 
 // new URLSearchParams é um objeto nativo do js para ler e manipular url
 // o parâmetro "window.location.search" procura tudo que vier depois do ? e guarda o valor da nova
-
 const movimentacaoSolicitada = new URLSearchParams(window.location.search).get('nova');
 
 
@@ -122,3 +122,7 @@ if (movimentacaoSolicitada === 'entrada') {
 
     modalAdicionarSaida.show();
 }
+
+
+
+
