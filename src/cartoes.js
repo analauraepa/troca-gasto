@@ -77,6 +77,7 @@ function atualizar_limite_disponivel() {
 //atualiza os cartoes sempre que uma compra ou pagamento mudar o limite
 function atualizar_cartoes() {
     carregar_cartoes(divCartoes, cartaoService.cartoes, cartaoService.calcular_limite_disponivel);
+    atualizar_limite_disponivel();
 }
 
 atualizar_cartoes();
