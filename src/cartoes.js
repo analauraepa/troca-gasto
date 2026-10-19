@@ -11,14 +11,14 @@ import { faTrash, faPencil } from '@fortawesome/free-solid-svg-icons';
 
 import { iniciar_cartao_controller } from './controllers/cartao.controller.js';
 import * as cartaoService from './services/cartao.services.js';
-import * as resumoService from './services/resumo.service.js';
+import * as resumoService from './services/index.service.js';
 import * as compraService from './services/compra.services.js';
 import { listar_parcelas, consultar_fatura_mes, alterar_estado_parcela, } from './services/faturas.services.js';
 import { carregar_cartoes, carregar_compras_cartao } from './components/cartao.components.js';
 import {
     exibirTotalFaturasCartoes,
     exibirMesFaturasCartoes
-} from './components/resumo.components.js';
+} from './components/index.components.js';
 
 library.add(faTrash, faPencil);
 dom.watch();

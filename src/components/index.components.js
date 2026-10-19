@@ -1,11 +1,17 @@
 
+// função responsável por aplicar as convenções brasileiras:
+// ponto para separar milhares e vírgula para centavos
+const formatarMoeda = valor => new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL'
+}).format(Number(valor)); //linha necessária para confirmar que o tipo é number
 
 // mostra o saldo total e aplica a cor correspondente ao sinal do valor
 export function exibirSaldoTotal(elemento, total) {
     const saldoTotal = document.createElement('strong');
     const valor = Number(total);
 
-    saldoTotal.textContent = `R$ ${valor}`;
+    saldoTotal.textContent = formatarMoeda(valor);
     saldoTotal.classList.add(valor >= 0 ? 'in' : 'out');
 
     elemento.replaceChildren(saldoTotal);
@@ -16,8 +22,7 @@ export function exibirTotalFaturasCartoes(elemento, total) {
     // encerra a função se a página não tiver o elemento de exibição
     if (!elemento) return;
 
-    // mostra o total sem aplicar formatação automática de moeda
-    elemento.textContent = `R$ ${Number(total)}`;
+    elemento.textContent = formatarMoeda(total);
 }
 
 // mostra o mês da fatura por extenso a partir de uma chave no formato aaaa-mm
@@ -43,15 +48,15 @@ export function exibirTotaisMovimentacoes(elementos, totais) {
     // cada elemento é opcional porque esta função também é chamada em outras páginas
     // cada if é para verificar se o elemento existe
     if (elementos.receitas) {
-        elementos.receitas.textContent = `R$ ${Number(totais.receitas).toFixed(2)}`;
+        elementos.receitas.textContent = formatarMoeda(totais.receitas);
     }
 
     if (elementos.despesas) {
-        elementos.despesas.textContent = `R$ ${Number(totais.despesas).toFixed(2)}`;
+        elementos.despesas.textContent = formatarMoeda(totais.despesas);
     }
 
     if (elementos.resultado) {
-        elementos.resultado.textContent = `R$ ${Number(totais.resultado).toFixed(2)}`;
+        elementos.resultado.textContent = formatarMoeda(totais.resultado);
         elementos.resultado.classList.toggle('in', totais.resultado >= 0);
         elementos.resultado.classList.toggle('out', totais.resultado < 0);
     }
@@ -60,7 +65,7 @@ export function exibirTotaisMovimentacoes(elementos, totais) {
 // mostra o total combinado das contas fixas que ainda estão pendentes.
 export function exibirTotalContasPendentes(elemento, total) {
     if (elemento) {
-        elemento.textContent = `R$ ${Number(total).toFixed(2)}`;
+        elemento.textContent = formatarMoeda(total);
     }
 }
 
@@ -84,7 +89,7 @@ export function exibirProximasContas(elemento, contas) {
 
     // usa-se um objeto temporario sendo conta os dados cadastrados, dataVencimento sendo projetada pelo mês de ref
     // e paga é o status da conta
-    // basicamente a formação daquela tabela visual da aba de resumo
+    // basicamente a formação daquela tabela visual da página inicial
     contas.forEach(({ conta, dataVencimento, paga }) => {
 
         //criação de elementos html
@@ -110,7 +115,7 @@ export function exibirProximasContas(elemento, contas) {
         valorEStatus.style.textAlign = 'right';
 
         const valor = document.createElement('strong');
-        valor.textContent = `R$ ${Number(conta.valor).toFixed(2)}`;
+        valor.textContent = formatarMoeda(conta.valor);
 
         const etiqueta = document.createElement('span');
         // mostra tag da conta se ela foi paga e editar a classe
@@ -159,7 +164,7 @@ export function exibirUltimasMovimentacoes(elemento, movimentacoes) {
         const valor = document.createElement('strong');
         const entrada = movimentacao.tipo === 'entrada';
         valor.className = entrada ? 'in' : 'out';
-        valor.textContent = `${entrada ? '+' : '−'}R$ ${Number(movimentacao.valor).toFixed(2)}`;
+        valor.textContent = `${entrada ? '+' : '−'}${formatarMoeda(movimentacao.valor)}`;
 
         const valorAlinhado = document.createElement('div');
         valorAlinhado.style.textAlign = 'right';

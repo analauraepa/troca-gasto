@@ -1,4 +1,4 @@
-// importa os dados salvos usados para montar o resumo.
+// importa os dados salvos usados para montar a página inicial.
 import { bancos } from "./banco.services.js";
 import { movimentacoes } from "./movimentacao.services.js";
 import { contasFixas } from "./contaFixa.services.js";

@@ -17,16 +17,23 @@ import { iniciarMovimentacaoController } from './controllers/movimentacao.contro
 
 import * as bancoService from './services/banco.services.js';
 import * as movimentacaoServices from './services/movimentacao.services.js'
+import * as indexService from './services/index.service.js';
 
 import { carregarBancos, carregarBancosOptions } from './components/banco.components.js';
 import { carregarMovimentacoes } from './components/movimentacao.components.js';
-import { iniciarResumoController } from './controllers/resumo.controller.js';
+import { exibirTotalFaturasCartoes } from './components/index.components.js';
+import { iniciarResumoController } from './controllers/index.controller.js';
 
 
 library.add(faTrash, faPencil);
 dom.watch();
 
 Object.assign(Datepicker.locales, ptBR);
+
+exibirTotalFaturasCartoes(
+    document.querySelector('#total-faturas-cartoes'),
+    indexService.calcularTotalFaturasCartoes()
+);
 
 // ELEMENTOS COMPARTILHADOS
 const divBancos = document.querySelector('#banks');
@@ -118,7 +125,6 @@ iniciarMovimentacaoController({
 
 const movimentacaoSolicitada = new URLSearchParams(window.location.search).get('nova');
 
-
 if (movimentacaoSolicitada === 'entrada') {
     // abre a janela/modal de entrada sobre a página
     modalAdicionarEntrada.show();
@@ -126,7 +132,5 @@ if (movimentacaoSolicitada === 'entrada') {
 } else if (movimentacaoSolicitada === 'saida') {
     modalAdicionarSaida.show();
 }
-
-
 
 

@@ -1,11 +1,11 @@
-import * as resumoService from '../services/resumo.service.js';
+import * as resumoService from '../services/index.service.js';
 import {
     exibirSaldoTotal,
     exibirTotaisMovimentacoes,
     exibirTotalContasPendentes,
     exibirProximasContas,
     exibirUltimasMovimentacoes
-} from '../components/resumo.components.js';
+} from '../components/index.components.js';
 
 // conecta os os calculos do service e componentes do resumo
 export function iniciarResumoController({
