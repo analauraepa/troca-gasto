@@ -17,7 +17,8 @@ export let compras = dados.map(compra => {
         compra.quantidade_de_parcelas ?? compra.quantidade_parcelas
     );
 
-    novaCompra.id = compra.id;
+    // Preserva o ID da compra utilizado pelo sistema de parcelas.
+    novaCompra.id = compra.id ?? novaCompra.id;
 
     return novaCompra;
 });

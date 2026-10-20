@@ -735,6 +735,122 @@ footer {
     outline: none;
 }
 
+/* Destaque para o resumo da conta e as opções de método dentro do modal de pagamento. */
+#modal-pagamento-conta-fixa .payment-summary {
+    margin: 0;
+    padding: 12px 14px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background-color: var(--green-pale);
+    color: var(--green-dark);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+#modal-pagamento-conta-fixa .payment-method-group {
+    gap: 15px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+#modal-pagamento-conta-fixa .payment-method-group legend {
+    float: none;
+    width: auto;
+    margin-bottom: 15px;
+}
+
+#modal-pagamento-conta-fixa .modal-form-group[hidden] {
+    /* Garante que o estilo flex dos grupos não sobrescreva o atributo HTML hidden. */
+    display: none;
+}
+
+#modal-pagamento-conta-fixa .payment-method-options {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+
+#modal-pagamento-conta-fixa .payment-method-option {
+    display: grid;
+    grid-template-columns: 28px minmax(0, 1fr) 16px;
+    align-items: start;
+    gap: 10px;
+    min-height: 102px;
+    margin: 0;
+    padding: 14px 12px;
+    border: 1px solid var(--line);
+    border-radius: 11px;
+    background-color: #fff;
+    cursor: pointer;
+    transition: border-color .2s, background-color .2s, box-shadow .2s;
+}
+
+#modal-pagamento-conta-fixa .payment-method-option:has(input:checked) {
+    /* Realça o método selecionado com as cores de estado do tema. */
+    border-color: var(--green);
+    background-color: var(--green-pale);
+    box-shadow: 0 0 0 2px rgba(63, 125, 91, .1);
+}
+
+#modal-pagamento-conta-fixa .payment-method-option:focus-within {
+    outline: 3px solid rgba(63, 125, 91, .2);
+    outline-offset: 2px;
+}
+
+#modal-pagamento-conta-fixa .payment-method-option input {
+    grid-column: 3;
+    grid-row: 1;
+    width: 16px;
+    height: 16px;
+    margin: 2px 0 0;
+    accent-color: var(--green);
+}
+
+#modal-pagamento-conta-fixa .payment-method-icon {
+    display: grid;
+    grid-column: 1;
+    grid-row: 1;
+    width: 28px;
+    height: 28px;
+    place-items: center;
+    border-radius: 8px;
+    background-color: var(--green-soft);
+    color: var(--green-dark);
+}
+
+#modal-pagamento-conta-fixa .payment-method-icon i {
+    width: 18px;
+    font-size: 16px;
+    text-align: center;
+}
+
+#modal-pagamento-conta-fixa .payment-method-copy {
+    display: flex;
+    grid-column: 1 / -1;
+    grid-row: 2;
+    flex-direction: column;
+    gap: 4px;
+}
+
+#modal-pagamento-conta-fixa .payment-method-copy strong {
+    color: var(--text);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+#modal-pagamento-conta-fixa .payment-method-copy > span {
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.4;
+}
+
+#modal-pagamento-conta-fixa #erro-pagamento-conta-fixa {
+    margin: 0;
+    color: var(--red);
+    font-size: 12px;
+}
+
 .modal .modal-footer {
     padding: 16px 24px 22px;
     border-top: 1px solid var(--line);

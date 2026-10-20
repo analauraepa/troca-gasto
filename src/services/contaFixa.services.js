@@ -9,8 +9,6 @@ export let contasFixas = dadosSalvos.map(conta => new ContaFixa(
     conta.valor,
     conta.dataVencimento,
     conta.categoria,
-    conta.banco,
-    conta.cartao,
     conta.ativa,
     conta.mesesPagos || []
 ));
@@ -26,8 +24,6 @@ export function adicionarContaFixa(
     valor,
     dataVencimento,
     categoria,
-    banco,
-    cartao,
     ativa = true
 ) {
     contasFixas.unshift(
@@ -36,8 +32,6 @@ export function adicionarContaFixa(
             valor,
             dataVencimento,
             categoria,
-            banco,
-            cartao,
             ativa
         )
     );
@@ -51,8 +45,6 @@ export function editarContaFixa(
     valor,
     dataVencimento,
     categoria,
-    banco,
-    cartao,
     ativa
 ) {
     const conta = contasFixas[index];
@@ -62,8 +54,6 @@ export function editarContaFixa(
     conta.valor = Number(valor);
     conta.dataVencimento = dataVencimento;
     conta.categoria = categoria;
-    conta.banco = banco;
-    conta.cartao = cartao;
     conta.ativa = ativa;
 
     salvarContasFixas();
@@ -79,17 +69,14 @@ export function excluirContaFixa(index) {
     return true;
 }
 
-// Alterna o estado de pagamento da conta para o mês informado.
-export function alternarPagamentoContaFixa(index, mes) {
+export function marcarPagamentoContaFixa(index, mes) {
     const conta = contasFixas[index];
     if (!conta) return false;
 
-    if (conta.mesesPagos.includes(mes)) {
-        conta.mesesPagos = conta.mesesPagos.filter(mesPago => mesPago !== mes);
-    } else {
-        conta.mesesPagos.push(mes);
-    }
+    // Impede registrar um segundo pagamento da mesma conta no mesmo mês.
+    if (conta.mesesPagos.includes(mes)) return false;
 
+    conta.mesesPagos.push(mes);
     salvarContasFixas();
     return true;
 }

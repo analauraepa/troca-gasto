@@ -87,7 +87,7 @@
 
     <footer>As contas fixas são salvas neste navegador.</footer>
 
-    <!-- Modais de cadastro, edição e exclusão. -->
+    <!-- Modais de cadastro, edição, exclusão e pagamento. -->
     <div
       class="modal fade"
       id="modal-conta-fixa"
@@ -107,6 +107,7 @@
               &times;
             </button>
           </div>
+          <!-- O cadastro guarda os dados recorrentes; a origem do dinheiro é escolhida ao pagar. -->
           <form id="form-conta-fixa" novalidate>
             <div class="modal-body">
               <div class="modal-form-group">
@@ -164,18 +165,6 @@
                 />
                 <div class="invalid-feedback hide">Insira uma categoria.</div>
               </div>
-              <div class="modal-form-group">
-                <label for="conta-fixa-banco" class="form-label">Banco</label>
-                <select id="conta-fixa-banco">
-                  <option value="">Selecione um banco</option>
-                </select>
-              </div>
-              <div class="modal-form-group">
-                <label for="conta-fixa-cartao" class="form-label">Cartão</label>
-                <select id="conta-fixa-cartao">
-                  <option value="">Selecione um cartão</option>
-                </select>
-              </div>
             </div>
             <div class="modal-footer">
               <button type="submit" class="btn btn-primary">
@@ -207,6 +196,7 @@
             </button>
           </div>
 
+          <!-- A edição altera os dados da conta, sem fixar banco ou cartão para os pagamentos. -->
           <form id="form-editar-conta-fixa" novalidate>
             <div class="modal-body">
               <div class="modal-form-group">
@@ -260,20 +250,6 @@
               </div>
 
               <div class="modal-form-group">
-                <label for="editar-conta-banco" class="form-label">Banco</label>
-                <select id="editar-conta-banco"></select>
-              </div>
-
-              <div class="modal-form-group">
-                <label for="editar-conta-cartao" class="form-label"
-                  >Cartão</label
-                >
-                <select id="editar-conta-cartao">
-                  <option value="">Selecione um cartão</option>
-                </select>
-              </div>
-
-              <div class="modal-form-group">
                 <label for="editar-conta-ativa" class="form-label"
                   >Status</label
                 >
@@ -315,7 +291,9 @@
           </div>
 
           <div class="modal-body">
-            <p>Tem certeza de que deseja excluir esta conta fixa?</p>
+            <p>
+              Tem certeza de que deseja excluir esta conta fixa?
+            </p>
           </div>
 
           <div class="modal-footer">
@@ -330,6 +308,90 @@
               Excluir
             </button>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="modal fade"
+      id="modal-pagamento-conta-fixa"
+      tabindex="-1"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Confirmar pagamento</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Fechar"
+            ></button>
+          </div>
+
+          <form id="form-pagamento-conta-fixa">
+            <div class="modal-body">
+              <!-- O resumo identifica qual conta e valor serão pagos no modal. -->
+              <p id="resumo-pagamento-conta-fixa" class="payment-summary"></p>
+
+              <!-- Os radios escolhem se o pagamento vira uma saída bancária ou compra no cartão. -->
+              <fieldset class="modal-form-group payment-method-group">
+                <legend class="form-label">Como deseja pagar?</legend>
+                <div class="payment-method-options">
+                  <label class="payment-method-option">
+                  <input
+                    type="radio"
+                    name="metodo-pagamento"
+                    value="banco"
+                    required
+                  />
+                    <span class="payment-method-icon" aria-hidden="true">
+                      <i class="fa-solid fa-landmark"></i>
+                    </span>
+                    <span class="payment-method-copy">
+                      <strong>Conta bancária</strong>
+                      <span>Debitar do saldo do banco</span>
+                    </span>
+                  </label>
+
+                  <label class="payment-method-option">
+                    <input type="radio" name="metodo-pagamento" value="cartao" />
+                    <span class="payment-method-icon" aria-hidden="true">
+                      <i class="fa-solid fa-credit-card"></i>
+                    </span>
+                    <span class="payment-method-copy">
+                      <strong>Cartão</strong>
+                      <span>Adicionar à fatura do cartão</span>
+                    </span>
+                  </label>
+                </div>
+              </fieldset>
+
+              <!-- Cada seletor só fica visível e obrigatório quando seu método foi selecionado. -->
+              <div class="modal-form-group" id="grupo-banco-pagamento" hidden>
+                <label for="banco-pagamento" class="form-label">Banco</label>
+                <select id="banco-pagamento">
+                  <option value="">Selecione um banco</option>
+                </select>
+              </div>
+
+              <div class="modal-form-group" id="grupo-cartao-pagamento" hidden>
+                <label for="cartao-pagamento" class="form-label">Cartão</label>
+                <select id="cartao-pagamento">
+                  <option value="">Selecione um cartão</option>
+                </select>
+              </div>
+
+              <p id="erro-pagamento-conta-fixa" role="alert" hidden></p>
+            </div>
+
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary">
+                Confirmar pagamento
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
