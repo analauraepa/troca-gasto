@@ -3,7 +3,12 @@ import './style.css';
 import './bootstrap.scss';
 import Modal from 'bootstrap/js/dist/modal';
 import { library, dom } from '@fortawesome/fontawesome-svg-core';
-import { faTrash, faPencil } from '@fortawesome/free-solid-svg-icons';
+import {
+    faTrash,
+    faPencil,
+    faLandmark,
+    faCreditCard
+} from '@fortawesome/free-solid-svg-icons';
 import Datepicker from 'vanillajs-datepicker/Datepicker';
 import ptBR from 'vanillajs-datepicker/locales/pt-BR';
 import 'vanillajs-datepicker/css/datepicker-bs5.css';
@@ -18,22 +23,17 @@ import { cartoes } from './services/cartao.services.js';
 import { carregar_cartoes_options } from './components/cartao.components.js';
 
 // Ativa os ícones usados nas ações da lista.
-library.add(faTrash, faPencil);
+library.add(faTrash, faPencil, faLandmark, faCreditCard);
 dom.watch();
 
 // Elementos principais da página.
 const lista = document.querySelector('#lista-contas-fixas');
-const selectBanco = document.querySelector('#conta-fixa-banco');
 const formulario = document.querySelector('#form-conta-fixa');
 const formularioEditar = document.querySelector('#form-editar-conta-fixa');
 const vencimentoEditar = document.querySelector('#editar-conta-vencimento');
-const selectBancoEditar = document.querySelector('#editar-conta-banco');
 const elementoTotal = document.querySelector('#total-mensal-contas-fixas');
 const elementoAtivas = document.querySelector('#quantidade-contas-ativas');
 const elementoPagas = document.querySelector('#quantidade-contas-pagas');
-const selectCartao = document.querySelector('#conta-fixa-cartao');
-const selectCartaoEditar = document.querySelector('#editar-conta-cartao');
-
 
 // Atualiza a lista e os indicadores do painel com os dados atuais.
 function atualizarPainel() {
@@ -46,12 +46,9 @@ function atualizarPainel() {
     );
 }
 
-// Exibe os dados iniciais e preenche os seletores de banco.
+// Exibe as contas; os seletores de banco e cartão são carregados apenas para o modal de pagamento.
 atualizarPainel();
-carregarBancosOptions(selectBanco, bancos);
-carregarBancosOptions(selectBancoEditar, bancos);
-carregar_cartoes_options(selectCartao, cartoes);
-carregar_cartoes_options(selectCartaoEditar, cartoes);
+
 
 // Configura os campos de vencimento no formato DD/MM/AAAA.
 Object.assign(Datepicker.locales, ptBR);
@@ -90,8 +87,6 @@ formulario.addEventListener('submit', event => {
         document.querySelector('#conta-fixa-valor').value,
         document.querySelector('#conta-fixa-vencimento').value,
         document.querySelector('#conta-fixa-categoria').value.trim(),
-        document.querySelector('#conta-fixa-banco').value,
-        document.querySelector('#conta-fixa-cartao').value
     );
 
     atualizarPainel();
@@ -99,14 +94,33 @@ formulario.addEventListener('submit', event => {
     modalContaFixa.hide();
 });
 
-// Inicia os eventos de edição, exclusão e pagamento.
+// Preenche os seletores usados no modal de pagamento, não no cadastro da conta fixa.
+const selectBancoPagamento = document.querySelector('#banco-pagamento');
+const selectCartaoPagamento = document.querySelector('#cartao-pagamento');
+
+carregarBancosOptions(selectBancoPagamento, bancos);
+selectBancoPagamento.insertBefore(
+    new Option('Selecione um banco', ''),
+    selectBancoPagamento.firstChild
+);
+carregar_cartoes_options(selectCartaoPagamento, cartoes);
+
+const modalPagamentoContaFixa = new Modal(
+    document.querySelector('#modal-pagamento-conta-fixa')
+);
+
+// Entrega ao controller o formulário, o modal e as opções de banco/cartão do pagamento.
 iniciarContaFixaController({
     lista,
     formularioEditar,
     datepickerEditar,
-    selectBancoEditar,
     modalEditarContaFixa,
     modalExcluirContaFixa,
     btnExcluirContaFixa,
-    atualizarPainel
+    atualizarPainel,
+
+    formularioPagamento: document.querySelector('#form-pagamento-conta-fixa'),
+    modalPagamentoContaFixa,
+    selectBancoPagamento,
+    selectCartaoPagamento
 });

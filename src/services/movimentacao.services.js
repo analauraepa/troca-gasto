@@ -4,17 +4,37 @@ import * as bancoService from "./banco.services.js"
 //Cria um array de objetos apartir dos dados salvos no localStorage, caso não haja dados, cria um array vazio
 const dados = JSON.parse(localStorage.getItem("movimentacoes")) || [];
 
-//Cria um array de instâncias de Movimentacao.js a partir do array dado
-export let movimentacoes = dados.map(movimentacao => new Movimentacao(movimentacao.descricao, movimentacao.tipo, Number(movimentacao.valor), movimentacao.data, movimentacao.banco, movimentacao.recorrente));
+// Recria as movimentações salvas como instâncias do modelo.
+export let movimentacoes = dados.map(movimentacao => new Movimentacao(
+    movimentacao.descricao,
+    movimentacao.tipo,
+    Number(movimentacao.valor),
+    movimentacao.data,
+    movimentacao.banco,
+    movimentacao.recorrente
+));
 
 //Transforma o array movimentacoes em texto e salva no localStorage
 export function salvarMovimentacoes(){
     localStorage.setItem("movimentacoes", JSON.stringify(movimentacoes));
 }
 
-//Adiciona uma nova movimentacao ao array movimentacoes e salva no localStorage
-export function adicionarMovimentacao(descricao, tipo, valor, data, banco){
-    movimentacoes.push(new Movimentacao(descricao,tipo,Number(valor),data,banco,false));
+// Adiciona uma movimentação, opcionalmente vinculada à conta fixa que a originou.
+export function adicionarMovimentacao(
+    descricao,
+    tipo,
+    valor,
+    data,
+    banco
+) {
+    movimentacoes.push(new Movimentacao(
+        descricao,
+        tipo,
+        Number(valor),
+        data,
+        banco,
+        false
+    ));
     movimentacoes.sort((a, b) => new Date(converterData(b.data)) - new Date(converterData(a.data)));
     salvarMovimentacoes();
 

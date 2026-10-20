@@ -4,8 +4,6 @@ export class ContaFixa {
         valor,
         dataVencimento,
         categoria,
-        banco,
-        cartao,
         ativa = true,
         mesesPagos = []
     ) {
@@ -13,8 +11,6 @@ export class ContaFixa {
         this.valor = Number(valor);
         this.dataVencimento = dataVencimento;
         this.categoria = categoria;
-        this.banco = banco;
-        this.cartao = cartao;
         this.ativa = ativa;
         this.mesesPagos = Array.isArray(mesesPagos) ? mesesPagos : [];
     }

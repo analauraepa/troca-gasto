@@ -15,8 +15,6 @@ export function carregarContasFixas(lista, contasFixas) {
                     <div class="row-title">${conta.descricao}</div>
                     <div class="small">
                         ${vencimento} · ${conta.categoria}
-                        ${conta.banco ? `· Banco: ${conta.banco}` : ''}
-                        ${conta.cartao ? `· Cartão: ${conta.cartao}` : ''}
                         <span class="badge ${conta.ativa ? '' : 'red'}">
                             ${conta.ativa ? 'ativa' : 'inativa'}
                         </span>
@@ -34,9 +32,16 @@ export function carregarContasFixas(lista, contasFixas) {
                         <button class="mini" type="button" aria-label="Excluir ${conta.descricao}" data-bs-toggle="modal" data-bs-target="#modal-excluir-conta-fixa">
                             <i class="fa-solid fa-trash" style="color: #c85b5b;"></i>
                         </button>
-                        <button class="btn fixed-bill-payment ${pagaNesteMes ? 'is-paid' : ''}" type="button" data-action="alternar-pagamento" aria-pressed="${pagaNesteMes}">
-                            ${pagaNesteMes ? 'Marcar como não paga' : 'Marcar como paga'}
-                        </button>
+                        ${pagaNesteMes ? '' : `
+                            <button
+                                class="btn fixed-bill-payment"
+                                type="button"
+                                data-action="confirmar-pagamento"
+                                data-bs-toggle="modal"
+                                data-bs-target="#modal-pagamento-conta-fixa">
+                                Confirmar pagamento
+                            </button>
+                        `}
                     </div>
                 </div>
             </div>
