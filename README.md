@@ -5,7 +5,7 @@ Sistema web para **organização e acompanhamento da vida financeira**, permitin
 
 O projeto tem como objetivo facilitar o controle financeiro de forma **simples, visual e organizada**, reunindo as principais informações em um único lugar.
 
----
+----
 
 ## 📌 Sobre o projeto
 
@@ -13,7 +13,7 @@ O sistema apresenta um painel inicial com um resumo da situação financeira do 
 
 A proposta é oferecer uma interface simples de utilizar, evitando excesso de informações e funcionalidades desnecessárias.
 
----
+----
 
 ## ✨ Funcionalidades
 
@@ -56,7 +56,7 @@ A proposta é oferecer uma interface simples de utilizar, evitando excesso de in
 - Edição e exclusão de contas.
 - Associação das movimentações às respectivas contas.
 
----
+----
 
 ## 🗂️ Organização do sistema
 
@@ -79,7 +79,7 @@ As contas próximas do vencimento são apresentadas no **Resumo**, enquanto seus
 
 O protótipo utiliza JavaScript de forma simples para controlar as interações e a apresentação dos dados.
 
----
+----
 
 ## 🎨 Interface
 
@@ -87,7 +87,7 @@ A interface utiliza uma paleta baseada em **tons de verde**, buscando transmitir
 
 O projeto também possui uma estrutura responsiva para facilitar a utilização em diferentes tamanhos de tela.
 
----
+----
 
 ## 🚀 Como executar
 
