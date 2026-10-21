@@ -89,27 +89,32 @@ O projeto também possui uma estrutura responsiva para facilitar a utilização 
 
 ----
 
-## 🚀 Como executar
+## 🚀 Como executar localmente
 
-1. Clone este repositório:
+Requer Node.js 22 ou superior.
 
-```bash
-git clone URL_DO_REPOSITORIO
-```
-
-2. Acesse a pasta do projeto:
+1. Instale as dependências:
 
 ```bash
-cd nome-do-projeto
+npm ci
 ```
 
-3. Abra o arquivo:
+2. Inicie o servidor de desenvolvimento:
 
-```text
-index.html
+```bash
+npm run dev
 ```
 
-O projeto pode ser executado diretamente no navegador, sem necessidade de instalar dependências adicionais nesta versão do protótipo.
+Para testar a versão de produção localmente:
+
+```bash
+npm run build
+npm run preview
+```
+
+## 🌐 Deploy no GitHub Pages
+
+O workflow em `.github/workflows/deploy.yml` publica o site automaticamente quando há um push para a branch `main`. No repositório do GitHub, configure **Settings → Pages → Build and deployment → Source** como **GitHub Actions**. Depois, acompanhe o workflow na aba **Actions**; o endereço publicado aparecerá no resultado do job de deploy.
 
 ---
 
@@ -149,4 +154,3 @@ O sistema apresentado atualmente é um **protótipo/base do projeto**. Novas fun
 ## 📄 Licença
 
 Este projeto foi desenvolvido para fins **acadêmicos e educacionais**.
-
