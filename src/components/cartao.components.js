@@ -136,3 +136,17 @@ export function carregar_compras_cartao(
         listaCompras.appendChild(card);
     });
 }
+
+export function carregar_cartoes_no_select(select, cartoes) {
+    if (!select) return;
+
+    // Remove as opções anteriores, mantendo a opção inicial.
+    select.innerHTML = '<option value="">Selecione um cartão</option>';
+
+    cartoes.forEach((cartao, index) => {
+        const opcao = document.createElement('option');
+        opcao.value = index;
+        opcao.textContent = cartao.nome;
+        select.appendChild(opcao);
+    });
+}

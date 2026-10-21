@@ -12,6 +12,7 @@ export function iniciar_cartao_controller({
     modal_editar_cartao,
     modal_excluir_cartao,
     btn_excluir_cartao,
+    carregar_cartoes_no_select
 }) {
     const input_nome_cartao = form_adicionar_cartao.querySelector(('#adicionar-nome-cartao'))
     const input_editar_cartao = form_editar_cartao.querySelector(('#editar-nome-cartao'))
@@ -72,8 +73,11 @@ export function iniciar_cartao_controller({
         }
     
         cartaoService.adicionar_cartao(nome, valor_fatura, limite_total, data_vencimento);
-    
+
+        
         atualizar_cartao_interface();
+        carregar_cartoes_no_select();
+
         form_adicionar_cartao.reset();
         modal_adicionar_cartao.hide();
         });

@@ -14,7 +14,7 @@ import * as cartaoService from './services/cartao.services.js';
 import * as resumoService from './services/index.service.js';
 import * as compraService from './services/compra.services.js';
 import { listar_parcelas, consultar_fatura_mes, alterar_estado_parcela, } from './services/faturas.services.js';
-import { carregar_cartoes, carregar_compras_cartao } from './components/cartao.components.js';
+import { carregar_cartoes, carregar_compras_cartao, carregar_cartoes_no_select } from './components/cartao.components.js';
 import {
     exibirTotalFaturasCartoes,
     exibirMesFaturasCartoes
@@ -90,6 +90,31 @@ atualizar_limite_disponivel();
 
 const listaComprasCartao = document.querySelector('#lista-compras-cartao');
 
+// Localiza o formulário de compras no HTML
+const form_compra = document.querySelector(
+    '#form-adicionar-compra'
+);
+
+// Localiza o campo que mostra as mensagens.
+const mensagem_compras = document.querySelector(
+    '#mensagem-compras'
+);
+
+
+// Localiza a lista de cartões do fómulario.
+const select_cartao_compra = document.querySelector(
+    '#cartao-compra'
+);
+
+function atualizar_select_cartoes() {
+    carregar_cartoes_no_select(
+        select_cartao_compra,
+        cartaoService.cartoes
+    );
+}
+
+atualizar_select_cartoes();
+
 function atualizar_lista_compras_cartao() {
     if (!listaComprasCartao) return;
 
@@ -111,10 +136,9 @@ function atualizar_lista_compras_cartao() {
 
             // Se for uma parcela pendente de um mês futuro,
             // abre o modal de próximas parcelas.
-            if (
-                !parcela.paga &&
-                mesReferencia > campoMes.value
-            ) {
+            // Ao clicar em qualquer parcela pendente,
+            // abre o modal de próximas parcelas.
+            if (!parcela.paga) {
                 atualizar_parcela_futuras();
                 modal_proximas_parcelas.show();
                 return;
@@ -149,40 +173,11 @@ iniciar_cartao_controller({
     modal_editar_cartao: modal_editar,
     modal_excluir_cartao: modal_excluir,
     btn_excluir_cartao: document.querySelector('#btn-excluir-cartao'),
+    carregar_cartoes_no_select: atualizar_select_cartoes,
 
 });
 
-// Localiza o formulário de compras no HTML
-const form_compra = document.querySelector(
-    '#form-adicionar-compra'
-);
-
-// Localiza o campo que mostra as mensagens.
-const mensagem_compras = document.querySelector(
-    '#mensagem-compras'
-);
-
-
-// Localiza a lista de cartões do fómulario.
-const select_cartao_compra = document.querySelector(
-    '#cartao-compra'
-);
-
-function carregar_cartoes_no_select(){
-    if (!select_cartao_compra) return;
-
-    // Remove as opções anteriores, mantendo a opção inicial.
-    select_cartao_compra.innerHTML = '<option value="">Selecione um cartão</option>';
-
-    cartaoService.cartoes.forEach((cartao, index) => {
-        const opcao = document.createElement('option');
-        opcao.value = index;
-        opcao.textContent = cartao.nome;
-        select_cartao_compra.appendChild(opcao);
-    });
-}
-
-carregar_cartoes_no_select();
+atualizar_cartoes_select();
 
 if (form_compra){
     form_compra.addEventListener('submit', function (evento){
@@ -229,7 +224,7 @@ if (form_compra){
             modal_registrar_compra.hide();
 
             // Atualiza a lista de compras de cartões disponiveis.
-            carregar_cartoes_no_select();
+            atualizar_cartoes_select();
             atualizar_fatura_mes();
             atualizar_total_faturas();
             atualizar_parcela_futuras();

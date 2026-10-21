@@ -30,11 +30,37 @@ export function gerar_parcelas_compra(compra) {
     const resto = totalCentavos % quantidade;
 
     // A data recebida do formulário está no formato AAAA-MM-DD.
-    const [ano, mes] = compra.data.split('-').map(Number);
+    let ano;
+    let mes;
 
-    if (!ano || !mes || mes < 1 || mes > 12) {
-        throw new Error('Data da compra inválida.');
-    }
+    if (/^\d{4}-\d{2}-\d{2}$/.test(compra.data)) {
+        // Formato AAAA-MM-DD
+        [ano, mes] = compra.data.split('-').map(Number);
+    } else if (/^\d{2}\/\d{2}\/\d{4}$/.test(compra.data)) {
+        // Formato DD/MM/AAAA
+        const [dia, mesInformado, anoInformado] = compra.data
+            .split('/')
+            .map(Number);
+
+        ano = anoInformado;
+        mes = mesInformado;
+
+        const dataValida = new Date(ano, mes - 1, dia);
+
+        if (
+            dataValida.getFullYear() !== ano ||
+            dataValida.getMonth() !== mes - 1 ||
+            dataValida.getDate() !== dia
+        ) {
+            throw new Error('Data da compra inválida.');
+        }
+        } else {
+            throw new Error('Formato de data inválido. Use DD/MM/AAAA.');
+        }
+
+        if (!ano || !mes || mes < 1 || mes > 12) {
+            throw new Error('Data da compra inválida.');
+        }
 
     const estados = carregar_estado_parcelas();
 
