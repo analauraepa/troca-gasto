@@ -534,3 +534,9 @@ function atualizar_parcela_futuras() {
             'Não foi possível carregar as parcelas futuras.';
     }
 }
+
+// necessário para linkar botão do resumo ao modal da pagina que add uma compra no cartão
+if (new URLSearchParams(window.location.search).get('nova') === 'nova-compra') {
+    // mostra o modal
+    modal_registrar_compra.show();
+}
