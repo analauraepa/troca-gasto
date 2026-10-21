@@ -158,10 +158,10 @@ Este projeto foi desenvolvido para fins **acadêmicos e educacionais**.
 
 ## Gráficos Commits
 
-
+<img width="1600" height="1131" alt="graflaura" src="https://github.com/user-attachments/assets/cf3c2131-ed29-494f-bb7a-6ffc62a9f814" />
 <img width="1131" height="1599" alt="grafgab" src="https://github.com/user-attachments/assets/7c6517c8-110f-4912-9e99-e4e243d8c0cf" />
 <img width="1600" height="1131" alt="grafdani" src="https://github.com/user-attachments/assets/30929ece-1338-4fdf-8b26-dc116aef273a" />
-<img width="1024" height="724" alt="juliagraf" src="https://github.com/user-attachments/assets/c0df4b07-b7e8-4139-9bce-6a9b7f30d09b" />
+
 <img width="1600" height="1131" alt="grafmarc" src="https://github.com/user-attachments/assets/def26a9a-e913-4469-90aa-738e9820a7e8" />
-<img width="1600" height="1131" alt="graflaura" src="https://github.com/user-attachments/assets/cf3c2131-ed29-494f-bb7a-6ffc62a9f814" />
+<img width="1024" height="724" alt="juliagraf" src="https://github.com/user-attachments/assets/c0df4b07-b7e8-4139-9bce-6a9b7f30d09b" />
 
