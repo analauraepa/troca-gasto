@@ -44,6 +44,13 @@ const modal_editar = new Modal(document.querySelector('#modal-editar-cartao'));
 const modal_excluir = new Modal(document.querySelector('#modal-excluir-cartao'));
 const modal_registrar_compra = new Modal(document.querySelector('#modal-registrar-compra'));
 const modal_proximas_parcelas = new Modal(document.querySelector('#modal-proximas-parcelas'));
+const elementoModalParcelas = document.querySelector('#modal-proximas-parcelas');
+
+elementoModalParcelas.addEventListener('hide.bs.modal', () => {
+    if (elementoModalParcelas.contains(document.activeElement)) {
+        document.activeElement.blur();
+    }
+});
 
 const valor_limite_total = document.querySelector('#limite-total-cartoes');
 const valor_limite_disponivel = document.querySelector('#limite-disponivel-cartoes');
@@ -177,7 +184,7 @@ iniciar_cartao_controller({
 
 });
 
-atualizar_cartoes_select();
+atualizar_select_cartoes();
 
 if (form_compra){
     form_compra.addEventListener('submit', function (evento){
@@ -220,11 +227,16 @@ if (form_compra){
             // Limpa  os campos após cadastro.
             form_compra.reset();
 
+            // Retira o foco de dentro do modal antes de fechá-lo.
+            if (modal_registrar_compra._element.contains(document.activeElement)) {
+                document.activeElement.blur();
+            }
+
             // Fecha o modal.
             modal_registrar_compra.hide();
 
             // Atualiza a lista de compras de cartões disponiveis.
-            atualizar_cartoes_select();
+            atualizar_select_cartoes();
             atualizar_fatura_mes();
             atualizar_total_faturas();
             atualizar_parcela_futuras();
