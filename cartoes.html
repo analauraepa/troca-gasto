@@ -34,11 +34,50 @@
   
 <section>
   <div class="card" style="margin-bottom:15px">
-    <div class="between">
-      <div>
-        <div class="label">Visualizar fatura</div>
-        <div class="small">Mês selecionado: outubro de 2026.</div></div>
-      <input type="month" class="month" id="mes-fatura" value="2026-10">
+      <div class="between">
+        <div>
+          <div class="label">Visualizar fatura</div>
+          <div class="small">Selecione o mês para consultar as faturas.</div>
+        </div>
+
+        <div class="seletor-mes">
+          <input
+            type="text"
+            class="month"
+            id="mes-fatura"
+            value="2026-10"
+            readonly
+            autocomplete="off"
+            aria-label="Selecionar mês da fatura"
+          >
+
+          <div
+            id="seletor-mes-personalizado"
+            class="seletor-mes-popup"
+            hidden
+          >
+          <div class="seletor-mes-cabecalho">
+            <button type="button" id="ano-anterior" aria-label="Ano anterior">‹</button>
+            <strong id="ano-seletor-mes">2026</strong>
+            <button type="button" id="ano-proximo" aria-label="Próximo ano">›</button>
+          </div>
+
+          <div class="seletor-mes-grade">
+            <button type="button" data-mes="01">Jan</button>
+            <button type="button" data-mes="02">Fev</button>
+            <button type="button" data-mes="03">Mar</button>
+            <button type="button" data-mes="04">Abr</button>
+            <button type="button" data-mes="05">Mai</button>
+            <button type="button" data-mes="06">Jun</button>
+            <button type="button" data-mes="07">Jul</button>
+            <button type="button" data-mes="08">Ago</button>
+            <button type="button" data-mes="09">Set</button>
+            <button type="button" data-mes="10">Out</button>
+            <button type="button" data-mes="11">Nov</button>
+            <button type="button" data-mes="12">Dez</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -67,13 +106,51 @@
     </div>
   </div>
 
-  <div class="card" style="margin-bottom: 20px">
-    <h3>Próximas parcelas</h3>
+  <!-- Modal Próximas Parcelas -->
+  <div
+    class="modal fade"
+    id="modal-proximas-parcelas"
+    tabindex="-1"
+    aria-labelledby="titulo-proximas-parcelas"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
 
-    <p class="small">Veja as cobranças previstas para os meses segunintes.</p>
+        <div class="modal-header">
+          <h5 class="modal-title" id="titulo-proximas-parcelas">
+            Próximas parcelas
+          </h5>
 
-    <div id="lista-parcelas-futuras">
-      Carregando parcelas futuras...
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Fechar"
+          ></button>
+        </div>
+
+        <div class="modal-body">
+          <p class="small">
+            Veja as cobranças previstas para os meses seguintes.
+          </p>
+
+          <div id="lista-parcelas-futuras">
+            Carregando parcelas futuras...
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn"
+            data-bs-dismiss="modal"
+          >
+            Fechar
+          </button>
+        </div>
+
+      </div>
     </div>
   </div>
 
@@ -91,72 +168,19 @@
   </div>
 
   <div class="section-head">
-    <div>
-      <h2>Compras no cartão</h2>
-      <p>Consulte compras à vista e parceladas feitas nos seus cartões.</p>
-    </div>
+  <div>
+    <h2>Compras no cartão</h2>
+    <p>Consulte compras à vista e parceladas feitas nos seus cartões.</p>
   </div>
 
-  <div class="card" style="margin-bottom: 20px;">
-    <h3>Registrar Compra</h3>
-    <p class="small">Cadastre uma compra à vista ou parcelada no cartão.</p>
-
-    <form id="form-adicionar-compra">
-      <div class="modal-form-group">
-        <label for="descricao-compra" class="form-label">Descrição da compra</label>
-        <input type="text" 
-        class="form-control" 
-        id="descricao-compra" 
-        placeholder="Ex.: Notebook" 
-        required>
-      </div>
-
-      <div class="modal-form-group">
-        <label for="valor-compra" class="form-label">Valor da compra (R$)</label>
-        <input type="number" 
-        class="form-control" 
-        id="valor-compra" 
-        placeholder="0,00" 
-        min="0" 
-        step="0.01"
-        required>
-      </div>
-
-      <div class="modal-form-group">
-        <label for="data-compra" class="form-label">Data da compra</label>
-        <input type="date"
-        class="form-control"
-        id="data-compra"
-        required>
-      </div>
-
-      <div class="modal-form-group">
-        <label for="cartao-compra" class="form-label">Cartão utilizado</label>
-        <select class="form-control" id="cartao-compra" required>
-          <option value="">Selecione um cartão</option>
-        </select>
-      </div>
-
-      <div class="modal-form-group">
-        <label for="parcelas-compra" class="form-label">Quantidade de parcelas</label>
-        <input type="number" 
-        class="form-control" 
-        id="parcelas-compra" 
-        min="1" 
-        step="1"
-        value="1"
-        required>
-
-        <div class="small">
-          Se informar 1, a compra será registrada como à vista.
-        </div>
-      </div>
-
-      <button type="submit" class="btn btn-primary">
-        Registrar compra
-      </button>
-    </form>
-  </div>
+  <button
+    type="button"
+    class="btn primary"
+    data-bs-toggle="modal"
+    data-bs-target="#modal-registrar-compra">
+    + Registrar compra
+  </button>
+</div>
 
   <div id="mensagem-compras" role="status" aria-live="polite"></div>
   
@@ -200,6 +224,153 @@
         <div class="modal-footer">
           <button type="submit" class="btn btn-primary">Adicionar cartão</button>
         </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Registrar Compra -->
+<div
+  class="modal fade"
+  id="modal-registrar-compra"
+  tabindex="-1"
+  aria-labelledby="titulo-modal-compra"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <!-- Cabeçalho do modal -->
+      <div class="modal-header">
+        <h5 class="modal-title" id="titulo-modal-compra">
+          Registrar compra
+        </h5>
+
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Fechar"
+        ></button>
+      </div>
+
+      <!-- Formulário -->
+      <form id="form-adicionar-compra">
+
+        <div class="modal-body">
+
+          <!-- Descrição -->
+          <div class="modal-form-group">
+            <label for="descricao-compra" class="form-label">
+              Descrição da compra
+            </label>
+
+            <input
+              type="text"
+              class="form-control"
+              id="descricao-compra"
+              placeholder="Ex.: Notebook"
+              required
+            >
+          </div>
+
+          <!-- Valor -->
+          <div class="modal-form-group">
+            <label for="valor-compra" class="form-label">
+              Valor da compra (R$)
+            </label>
+
+            <input
+              type="number"
+              class="form-control"
+              id="valor-compra"
+              placeholder="0,00"
+              min="0.01"
+              step="0.01"
+              required
+            >
+          </div>
+
+          <!-- Data com calendário -->
+          <div class="modal-form-group">
+            <label for="data-compra" class="form-label">
+              Data da compra
+            </label>
+
+            <input
+              type="text"
+              class="form-control"
+              id="data-compra"
+              placeholder="DD/MM/AAAA"
+              autocomplete="off"
+              readonly
+              required
+            >
+          </div>
+
+          <!-- Cartão utilizado -->
+          <div class="modal-form-group">
+            <label for="cartao-compra" class="form-label">
+              Cartão utilizado
+            </label>
+
+            <select
+              class="form-control"
+              id="cartao-compra"
+              required
+            >
+              <option value="">Selecione um cartão</option>
+            </select>
+          </div>
+
+          <!-- Quantidade de parcelas -->
+          <div class="modal-form-group">
+            <label for="parcelas-compra" class="form-label">
+              Quantidade de parcelas
+            </label>
+
+            <input
+              type="number"
+              class="form-control"
+              id="parcelas-compra"
+              min="1"
+              step="1"
+              value="1"
+              required
+            >
+
+            <div class="small">
+              Se informar 1, a compra será registrada como à vista.
+            </div>
+          </div>
+
+          <!-- Mensagens de sucesso ou erro -->
+          <div
+            id="mensagem-compras"
+            role="status"
+            aria-live="polite"
+          ></div>
+
+        </div>
+
+        <!-- Rodapé -->
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Cancelar
+          </button>
+
+          <button
+            type="submit"
+            class="btn btn-primary"
+          >
+            Registrar compra
+          </button>
+        </div>
+
       </form>
     </div>
   </div>

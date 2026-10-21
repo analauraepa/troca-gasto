@@ -32,14 +32,18 @@ const opcoesDataVencimento = {
 
 const data_adicionar = document.querySelector('#adicionar-data-vencimento');
 const data_editar = document.querySelector('#editar-data-vencimento');
+const data_compra = document.querySelector('#data-compra');
 
 if (data_adicionar) new Datepicker(data_adicionar, { ...opcoesDataVencimento });
 if (data_editar) new Datepicker(data_editar, { ...opcoesDataVencimento });
+if (data_compra) new Datepicker(data_compra, {...opcoesDataVencimento});
 
 const divCartoes = document.querySelector('#cartoes');
 const modal_adicionar = new Modal(document.querySelector('#modal-adicionar-cartao'));
 const modal_editar = new Modal(document.querySelector('#modal-editar-cartao'));
 const modal_excluir = new Modal(document.querySelector('#modal-excluir-cartao'));
+const modal_registrar_compra = new Modal(document.querySelector('#modal-registrar-compra'));
+const modal_proximas_parcelas = new Modal(document.querySelector('#modal-proximas-parcelas'));
 
 const valor_limite_total = document.querySelector('#limite-total-cartoes');
 const valor_limite_disponivel = document.querySelector('#limite-disponivel-cartoes');
@@ -94,18 +98,34 @@ function atualizar_lista_compras_cartao() {
         compraService.compras,
         listar_parcelas,
         (idParcela, mesReferencia) => {
-            const campoMes = document.querySelector('#mes-fatura');
+        const campoMes = document.querySelector('#mes-fatura');
 
-            if (!campoMes || !mesReferencia) return;
+        if (!campoMes || !mesReferencia) return;
 
-            // Seleciona o mês da parcela clicada.
+            // Procura a parcela clicada.
+            const parcela = listar_parcelas().find(
+                item => item.id === idParcela
+            );
+
+            if (!parcela) return;
+
+            // Se for uma parcela pendente de um mês futuro,
+            // abre o modal de próximas parcelas.
+            if (
+                !parcela.paga &&
+                mesReferencia > campoMes.value
+            ) {
+                atualizar_parcela_futuras();
+                modal_proximas_parcelas.show();
+                return;
+            }
+
+            // Para os demais casos, mantém o comportamento anterior.
             campoMes.value = mesReferencia;
 
-            // Atualiza a fatura e as próximas parcelas.
             atualizar_fatura_mes();
             atualizar_parcela_futuras();
 
-            // Leva o usuário até a seção da fatura.
             campoMes.scrollIntoView({
                 behavior: 'smooth',
                 block: 'center'
@@ -204,6 +224,9 @@ if (form_compra){
 
             // Limpa  os campos após cadastro.
             form_compra.reset();
+
+            // Fecha o modal.
+            modal_registrar_compra.hide();
 
             // Atualiza a lista de compras de cartões disponiveis.
             carregar_cartoes_no_select();
@@ -319,6 +342,74 @@ function atualizar_fatura_mes() {
 }
 
 const campoMesFatura = document.querySelector('#mes-fatura');
+const popupMes = document.querySelector('#seletor-mes-personalizado');
+const textoAno = document.querySelector('#ano-seletor-mes');
+const botaoAnoAnterior = document.querySelector('#ano-anterior');
+const botaoAnoProximo = document.querySelector('#ano-proximo');
+
+if (
+  campoMesFatura &&
+  popupMes &&
+  textoAno &&
+  botaoAnoAnterior &&
+  botaoAnoProximo
+) {
+  let anoExibido = Number(campoMesFatura.value.split('-')[0]);
+
+  function atualizarSeletorMes() {
+    textoAno.textContent = anoExibido;
+
+    const [anoSelecionado, mesSelecionado] =
+      campoMesFatura.value.split('-');
+
+    popupMes.querySelectorAll('[data-mes]').forEach(botao => {
+      const selecionado =
+        botao.dataset.mes === mesSelecionado &&
+        Number(anoSelecionado) === anoExibido;
+
+      botao.classList.toggle('selecionado', selecionado);
+    });
+  }
+
+  campoMesFatura.addEventListener('click', () => {
+    anoExibido = Number(campoMesFatura.value.split('-')[0]);
+    atualizarSeletorMes();
+    popupMes.hidden = !popupMes.hidden;
+  });
+
+  botaoAnoAnterior.addEventListener('click', () => {
+    anoExibido--;
+    atualizarSeletorMes();
+  });
+
+  botaoAnoProximo.addEventListener('click', () => {
+    anoExibido++;
+    atualizarSeletorMes();
+  });
+
+  popupMes.querySelectorAll('[data-mes]').forEach(botao => {
+    botao.addEventListener('click', () => {
+      campoMesFatura.value =
+        `${anoExibido}-${botao.dataset.mes}`;
+
+      popupMes.hidden = true;
+
+      // Atualiza os dados do mês escolhido.
+      atualizar_fatura_mes();
+      atualizar_total_faturas();
+      atualizar_parcela_futuras();
+    });
+  });
+
+  document.addEventListener('click', evento => {
+    if (
+      !popupMes.contains(evento.target) &&
+      !campoMesFatura.contains(evento.target)
+    ) {
+      popupMes.hidden = true;
+    }
+  });
+}
 
 
 if (campoMesFatura) {
