@@ -1,167 +1,36 @@
-# Troca Gastos
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Getting Started
 
-Sistema web para **organização e acompanhamento da vida financeira**, permitindo registrar receitas, despesas, movimentações, contas bancárias, cartões e compras parceladas.
-
-O projeto tem como objetivo facilitar o controle financeiro de forma **simples, visual e organizada**, reunindo as principais informações em um único lugar.
-
-----
-
-## 📌 Sobre o projeto
-
-O sistema apresenta um painel inicial com um resumo da situação financeira do usuário e permite acompanhar suas movimentações e cartões.
-
-A proposta é oferecer uma interface simples de utilizar, evitando excesso de informações e funcionalidades desnecessárias.
-
-----
-
-## ✨ Funcionalidades
-
-### 📊 Resumo
-- Visualização do saldo total disponível.
-- Resumo das receitas e despesas.
-- Resultado financeiro.
-- Visualização das próximas contas a vencer.
-- Resumo das movimentações mais recentes.
-- Acesso às movimentações completas através do botão **"Ver mais"**.
-- Visualização do total das faturas dos cartões.
-
-### 💳 Cartões
-- Cadastro de cartões.
-- Definição de limite.
-- Visualização do limite disponível.
-- Visualização da fatura de cada cartão.
-- Visualização da fatura total de todos os cartões.
-- Consulta de faturas atuais e futuras por mês.
-- Registro de compras no cartão.
-- Registro de compras parceladas.
-- Acompanhamento das parcelas.
-- Distribuição das parcelas nas faturas futuras.
-
-### 🏦 Movimentações
-- Cadastro de movimentações.
-- Classificação como **Entrada** ou **Saída**.
-- Registro de descrição, valor e data.
-- Classificação por categoria.
-- Associação da movimentação a uma conta bancária.
-- Cadastro de despesas recorrentes.
-- Edição e exclusão de movimentações.
-- Filtros por período, categoria e conta.
-- Visualização das movimentações da mais recente para a mais antiga.
-- Registro de contas como uma categoria de despesa.
-
-### 🧾 Contas
-- Cadastro de contas bancárias.
-- Visualização do saldo de cada conta.
-- Edição e exclusão de contas.
-- Associação das movimentações às respectivas contas.
-
-----
-
-## 🗂️ Organização do sistema
-
-O sistema é dividido principalmente em:
-
-- **Resumo** — visão geral das finanças.
-- **Movimentações** — contas bancárias e registros financeiros.
-- **Cartões** — faturas, limites e compras parceladas.
-
-As contas próximas do vencimento são apresentadas no **Resumo**, enquanto seus valores são registrados nas movimentações como despesas da categoria **Conta**.
-
----
-
-## 🛠️ Tecnologias utilizadas
-
-- **HTML5**
-- **CSS3**
-- **JavaScript**
-- **Google Fonts**
-
-O protótipo utiliza JavaScript de forma simples para controlar as interações e a apresentação dos dados.
-
-----
-
-## 🎨 Interface
-
-A interface utiliza uma paleta baseada em **tons de verde**, buscando transmitir uma aparência limpa, organizada e relacionada ao tema financeiro.
-
-O projeto também possui uma estrutura responsiva para facilitar a utilização em diferentes tamanhos de tela.
-
-----
-
-## 🚀 Como executar localmente
-
-Requer Node.js 22 ou superior.
-
-1. Instale as dependências:
-
-```bash
-npm ci
-```
-
-2. Inicie o servidor de desenvolvimento:
+First, run the development server:
 
 ```bash
 npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
-Para testar a versão de produção localmente:
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-```bash
-npm run build
-npm run preview
-```
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-## 🌐 Deploy no GitHub Pages
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-O workflow em `.github/workflows/deploy.yml` publica o site automaticamente quando há um push para a branch `main`. No repositório do GitHub, configure **Settings → Pages → Build and deployment → Source** como **GitHub Actions**. Depois, acompanhe o workflow na aba **Actions**; o endereço publicado aparecerá no resultado do job de deploy.
+## Learn More
 
----
+To learn more about Next.js, take a look at the following resources:
 
-## 📁 Estrutura do projeto
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-```text
-📦 projeto-controle-financeiro
-│
-├── 📄 index.html
-├── 📁 css/
-│   └── style.css
-├── 📁 js/
-│   └── script.js
-├── 📁 img/
-│   └── ...
-└── 📄 README.md
-```
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-> A estrutura pode ser modificada conforme o desenvolvimento do projeto.
+## Deploy on Vercel
 
----
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-## 👥 Equipe
-
-Projeto desenvolvido por estudantes de **Engenharia de Software** como parte de um projeto acadêmico.
-
----
-
-## 📌 Status do projeto
-
-🚧 **Em desenvolvimento**
-
-O sistema apresentado atualmente é um **protótipo/base do projeto**. Novas funcionalidades e melhorias poderão ser adicionadas durante o desenvolvimento.
-
----
-
-## 📄 Licença
-
-Este projeto foi desenvolvido para fins **acadêmicos e educacionais**.
-
-
-## Gráficos Commits
-
-<img width="1600" height="1131" alt="graflaura" src="https://github.com/user-attachments/assets/cf3c2131-ed29-494f-bb7a-6ffc62a9f814" />
-<img width="1131" height="1599" alt="grafgab" src="https://github.com/user-attachments/assets/7c6517c8-110f-4912-9e99-e4e243d8c0cf" />
-<img width="1600" height="1131" alt="grafdani" src="https://github.com/user-attachments/assets/30929ece-1338-4fdf-8b26-dc116aef273a" />
-
-<img width="1600" height="1131" alt="grafmarc" src="https://github.com/user-attachments/assets/def26a9a-e913-4469-90aa-738e9820a7e8" />
-<img width="1024" height="724" alt="juliagraf" src="https://github.com/user-attachments/assets/c0df4b07-b7e8-4139-9bce-6a9b7f30d09b" />
-
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

@@ -1,0 +1,17 @@
+[
+    {
+        "nome": "Cagepa",
+        "valor": 350.51,
+        "pago": false
+    },
+    {
+        "nome": "Energisa",
+        "valor": 430.02,
+        "pago": false
+    },
+    {
+        "nome": "Unimed",
+        "valor": 380.62,
+        "pago": true
+    }
+]
