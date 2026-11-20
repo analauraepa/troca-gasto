@@ -1,10 +1,5 @@
 export type Fatura = {
-  date: string;
-  title: string;
-  amount: number;
-};
-
-export type FaturaAgrupada = {
     data: string;
+    descricao: string;
     valor: number;
-}
+};
